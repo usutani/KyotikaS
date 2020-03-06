@@ -15,6 +15,7 @@
 		97383CAC241225E70076A135 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97383CAB241225E70076A135 /* Assets.xcassets */; };
 		97383CAF241225E70076A135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97383CAD241225E70076A135 /* LaunchScreen.storyboard */; };
 		97383CBA241225E70076A135 /* KyotikaSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CB9241225E70076A135 /* KyotikaSTests.swift */; };
+		97383CCA24122AEC0076A135 /* Vaults.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 97383CC924122AEC0076A135 /* Vaults.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		97383CB5241225E70076A135 /* KyotikaSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KyotikaSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97383CB9241225E70076A135 /* KyotikaSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotikaSTests.swift; sourceTree = "<group>"; };
 		97383CBB241225E70076A135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97383CC924122AEC0076A135 /* Vaults.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vaults.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				97383CAD241225E70076A135 /* LaunchScreen.storyboard */,
 				97383CB0241225E70076A135 /* Info.plist */,
 				97383CA8241225E60076A135 /* KyotikaS.xcdatamodeld */,
+				97383CC924122AEC0076A135 /* Vaults.sqlite */,
 			);
 			path = KyotikaS;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97383CCA24122AEC0076A135 /* Vaults.sqlite in Resources */,
 				97383CAF241225E70076A135 /* LaunchScreen.storyboard in Resources */,
 				97383CAC241225E70076A135 /* Assets.xcassets in Resources */,
 				97383CA7241225E60076A135 /* Main.storyboard in Resources */,
