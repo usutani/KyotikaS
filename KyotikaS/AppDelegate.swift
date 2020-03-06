@@ -43,6 +43,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          error conditions that could cause the creation of the store to fail.
         */
         let container = NSPersistentContainer(name: "Vaults")
+        
+        // ランドマーク（クイズを含む）を準備する。
+        // アプリのdocumentsDirectoryにVaults.sqliteが存在しなければコピーする。
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        let storeUrl = documentsDirectory.appendingPathComponent("Vaults.sqlite")
+        if !FileManager.default.fileExists(atPath: (storeUrl.path)) {
+            let seededDataUrl = Bundle.main.url(forResource: "Vaults", withExtension: "sqlite")
+            try! FileManager.default.copyItem(at: seededDataUrl!, to: storeUrl)
+        }
+        // SQLiteファイルの場所を設定する。
+        let description = NSPersistentStoreDescription()
+        description.url = storeUrl
+        container.persistentStoreDescriptions = [description]
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

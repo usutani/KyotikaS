@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         fr.sortDescriptors = [NSSortDescriptor(key: #keyPath(Landmark.hiragana), ascending: true)]
         do {
             landmarks = try viewContext.fetch(fr) as! [Landmark]
-            os_log("Landmark is fetched.", log: OSLog.default, type: .info)
+            os_log("Landmark is fetched. Count: %d", log: OSLog.default, type: .info, landmarks.count)
         } catch {
             os_log("Landmark is not fetched.", log: OSLog.default, type: .error)
         }
