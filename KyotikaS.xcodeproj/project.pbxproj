@@ -11,7 +11,6 @@
 		97383CA2241225E60076A135 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CA1241225E60076A135 /* SceneDelegate.swift */; };
 		97383CA4241225E60076A135 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CA3241225E60076A135 /* ViewController.swift */; };
 		97383CA7241225E60076A135 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97383CA5241225E60076A135 /* Main.storyboard */; };
-		97383CAA241225E60076A135 /* KyotikaS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 97383CA8241225E60076A135 /* KyotikaS.xcdatamodeld */; };
 		97383CAC241225E70076A135 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97383CAB241225E70076A135 /* Assets.xcassets */; };
 		97383CAF241225E70076A135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97383CAD241225E70076A135 /* LaunchScreen.storyboard */; };
 		97383CBA241225E70076A135 /* KyotikaSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CB9241225E70076A135 /* KyotikaSTests.swift */; };
@@ -35,7 +34,6 @@
 		97383CA1241225E60076A135 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		97383CA3241225E60076A135 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		97383CA6241225E60076A135 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		97383CA9241225E60076A135 /* KyotikaS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KyotikaS.xcdatamodel; sourceTree = "<group>"; };
 		97383CAB241225E70076A135 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97383CAE241225E70076A135 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97383CB0241225E70076A135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 				97383CAB241225E70076A135 /* Assets.xcassets */,
 				97383CAD241225E70076A135 /* LaunchScreen.storyboard */,
 				97383CB0241225E70076A135 /* Info.plist */,
-				97383CA8241225E60076A135 /* KyotikaS.xcdatamodeld */,
 				97383CC924122AEC0076A135 /* Vaults.sqlite */,
 				97383CCB24122B1A0076A135 /* Vaults.xcdatamodeld */,
 			);
@@ -210,7 +207,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97383CAA241225E60076A135 /* KyotikaS.xcdatamodeld in Sources */,
 				97383CA4241225E60076A135 /* ViewController.swift in Sources */,
 				97383CCD24122B1A0076A135 /* Vaults.xcdatamodeld in Sources */,
 				97383CA0241225E60076A135 /* AppDelegate.swift in Sources */,
@@ -479,16 +475,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		97383CA8241225E60076A135 /* KyotikaS.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				97383CA9241225E60076A135 /* KyotikaS.xcdatamodel */,
-			);
-			currentVersion = 97383CA9241225E60076A135 /* KyotikaS.xcdatamodel */;
-			path = KyotikaS.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		97383CCB24122B1A0076A135 /* Vaults.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
