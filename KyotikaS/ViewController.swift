@@ -35,8 +35,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
     //MARK: MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let treasureAnnotations = vaults.treasureAnnotations
-        mapView.addAnnotations(treasureAnnotations)
+        // 現時点では全てのお宝を表示する。状態に応じた画像表示もなし。
+        mapView.addAnnotations(vaults.treasureAnnotations)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
