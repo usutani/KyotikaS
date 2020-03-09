@@ -31,5 +31,26 @@ class ViewController: UIViewController, MKMapViewDelegate {
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
     }
-
+    
+    //MARK: MKMapViewDelegate
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let treasureAnnotations = vaults.treasureAnnotations
+        mapView.addAnnotations(treasureAnnotations)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        switch annotation {
+        case is TreasureAnnotation:
+            let reuseId = "TreasureAnnotation"
+            var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+            if av == nil {
+                av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            }
+            av?.annotation = annotation
+            return av
+        default:
+            return nil
+        }
+    }
 }
