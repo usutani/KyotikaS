@@ -21,18 +21,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var landmarks: [Landmark] = []
-
+    var vaults: Vaults! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Landmark")
-        fr.sortDescriptors = [NSSortDescriptor(key: #keyPath(Landmark.hiragana), ascending: true)]
-        do {
-            landmarks = try viewContext.fetch(fr) as! [Landmark]
-            os_log("Landmark is fetched. Count: %d", log: OSLog.default, type: .info, landmarks.count)
-        } catch {
-            os_log("Landmark is not fetched.", log: OSLog.default, type: .error)
-        }
+        vaults = Vaults()
         
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
