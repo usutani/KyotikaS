@@ -20,7 +20,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
     // MARK: Properties
     @IBOutlet weak var mapView: MKMapView!
     var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var landmarks: [Landmark] = []
     var vaults: Vaults! = nil
     
     override func viewDidLoad() {
