@@ -18,6 +18,7 @@
 		97383CCD24122B1A0076A135 /* Vaults.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 97383CCB24122B1A0076A135 /* Vaults.xcdatamodeld */; };
 		9757DFFC2416365500DAA670 /* Vaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFB2416365500DAA670 /* Vaults.swift */; };
 		9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */; };
+		979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D9932241760A600E510DD /* TreasureAnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		97383CCC24122B1A0076A135 /* Vaults.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vaults.xcdatamodel; sourceTree = "<group>"; };
 		9757DFFB2416365500DAA670 /* Vaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaults.swift; sourceTree = "<group>"; };
 		9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotation.swift; sourceTree = "<group>"; };
+		979D9932241760A600E510DD /* TreasureAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				97383CCB24122B1A0076A135 /* Vaults.xcdatamodeld */,
 				9757DFFB2416365500DAA670 /* Vaults.swift */,
 				9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */,
+				979D9932241760A600E510DD /* TreasureAnnotationView.swift */,
 			);
 			path = KyotikaS;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				9757DFFC2416365500DAA670 /* Vaults.swift in Sources */,
 				97383CA0241225E60076A135 /* AppDelegate.swift in Sources */,
 				97383CA2241225E60076A135 /* SceneDelegate.swift in Sources */,
+				979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */,
 				9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

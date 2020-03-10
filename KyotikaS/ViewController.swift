@@ -44,7 +44,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             let reuseId = "TreasureAnnotation"
             var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
             if av == nil {
-                av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                av = TreasureAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             }
             av?.annotation = annotation
             return av
