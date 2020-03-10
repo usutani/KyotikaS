@@ -52,4 +52,18 @@ class ViewController: UIViewController, MKMapViewDelegate {
             return nil
         }
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let tav = view as? TreasureAnnotationView {
+            print(tav.annotation?.coordinate ?? "")
+            if let ta = tav.annotation as? TreasureAnnotation {
+                print(ta.landmark.name ?? "")
+                print(ta.landmark.question ?? "")
+            }
+        }
+        // 選択を解除
+        for annotaion in mapView.selectedAnnotations {
+            mapView.deselectAnnotation(annotaion, animated: false)
+        }
+    }
 }
