@@ -11,7 +11,7 @@ import CoreData
 import os.log
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -59,11 +59,28 @@ class ViewController: UIViewController, MKMapViewDelegate {
             if let ta = tav.annotation as? TreasureAnnotation {
                 print(ta.landmark.name ?? "")
                 print(ta.landmark.question ?? "")
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "QuizTableViewController") as? QuizTableViewController {
+                    vc.question = ta.landmark.question ?? ""
+                    vc.answers.append(ta.landmark.answer1 ?? "")
+                    vc.answers.append(ta.landmark.answer2 ?? "")
+                    vc.answers.append(ta.landmark.answer3 ?? "")
+                    vc.userRef = ta
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.delegate = self
+                    present(vc, animated: true, completion: nil)
+                }
             }
         }
         // 選択を解除
         for annotaion in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotaion, animated: false)
         }
+    }
+    
+    //MARK: QuizTableViewControllerDelegate
+    
+    func quizTableViewControllerAnswer(_ view: QuizTableViewController) {
+        print(view.selectedIndex)
+        print((view.userRef?.landmark.correct?.intValue ?? 0) - 1)
     }
 }

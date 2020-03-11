@@ -19,6 +19,7 @@
 		9757DFFC2416365500DAA670 /* Vaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFB2416365500DAA670 /* Vaults.swift */; };
 		9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */; };
 		979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D9932241760A600E510DD /* TreasureAnnotationView.swift */; };
+		979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D99342417767A00E510DD /* QuizTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		9757DFFB2416365500DAA670 /* Vaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaults.swift; sourceTree = "<group>"; };
 		9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotation.swift; sourceTree = "<group>"; };
 		979D9932241760A600E510DD /* TreasureAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotationView.swift; sourceTree = "<group>"; };
+		979D99342417767A00E510DD /* QuizTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				97383C9F241225E60076A135 /* AppDelegate.swift */,
 				97383CA1241225E60076A135 /* SceneDelegate.swift */,
 				97383CA3241225E60076A135 /* ViewController.swift */,
+				979D99342417767A00E510DD /* QuizTableViewController.swift */,
 				97383CA5241225E60076A135 /* Main.storyboard */,
 				97383CAB241225E70076A135 /* Assets.xcassets */,
 				97383CAD241225E70076A135 /* LaunchScreen.storyboard */,
@@ -216,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */,
 				97383CA4241225E60076A135 /* ViewController.swift in Sources */,
 				97383CCD24122B1A0076A135 /* Vaults.xcdatamodeld in Sources */,
 				9757DFFC2416365500DAA670 /* Vaults.swift in Sources */,
