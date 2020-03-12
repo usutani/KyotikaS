@@ -64,7 +64,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
                     os_log("TreasureAnnotation is locking. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
                     return
                 }
-                // クイズをひ表示する。
+                // クイズを表示する。
                 if let vc = storyboard?.instantiateViewController(withIdentifier: "QuizTableViewController") as? QuizTableViewController {
                     vc.question = ta.landmark.question ?? ""
                     vc.answers.append(ta.landmark.answer1 ?? "")
