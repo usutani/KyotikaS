@@ -46,4 +46,10 @@ class Vaults: NSObject {
         }
     }
     
+    func setPassedAnnotation(_ ta: TreasureAnnotation) {
+        if !ta.passed {
+            totalPassedCount += 1
+            ta.passed = true
+        }
+    }
 }

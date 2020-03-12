@@ -13,5 +13,12 @@ class TreasureAnnotation: MKPointAnnotation {
     
     // MARK: Properties
     var landmark: Landmark!
-    
+    var passed: Bool {
+        get {
+            return landmark.passed!.boolValue
+        }
+        set(newValue) {
+            landmark.passed = newValue as NSNumber
+        }
+    }
 }

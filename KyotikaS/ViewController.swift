@@ -80,7 +80,15 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     //MARK: QuizTableViewControllerDelegate
     
     func quizTableViewControllerAnswer(_ view: QuizTableViewController) {
-        print(view.selectedIndex)
-        print((view.userRef?.landmark.correct?.intValue ?? 0) - 1)
+        guard let treasureAnnotation = view.userRef else {
+            os_log("view.userRef is not setted.", log: OSLog.default, type: .error)
+            return
+        }
+        let correct = (treasureAnnotation.landmark.correct?.intValue ?? 0) - 1
+        if (view.selectedIndex == correct) {
+            vaults.setPassedAnnotation(treasureAnnotation)
+            let v = mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
+            v.startAnimation()
+        }
     }
 }

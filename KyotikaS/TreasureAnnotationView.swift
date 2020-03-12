@@ -43,7 +43,14 @@ class TreasureAnnotationView: MKAnnotationView {
         layer.addSublayer(blinker)
     }
     
-    private func startAnimation() {
+    func startAnimation() {
+        let ta = self.annotation as! TreasureAnnotation
+        if ta.passed {
+            blinker.removeFromSuperlayer()
+            blinker = nil
+            image = UIImage(named: "Landmark")
+            return
+        }
         let ka = CAKeyframeAnimation(keyPath: "contentsRect")
         ka.values = animationRectValues()
         ka.calculationMode = .discrete
