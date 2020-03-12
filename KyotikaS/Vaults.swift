@@ -17,9 +17,12 @@ class Vaults: NSObject {
     var moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var treasureAnnotations: [TreasureAnnotation] = []
     var totalPassedCount = 0
-
+    var progress = Progress()
+    
     override init() {
         super.init()
+        
+        progress.initWithUserDefaults()
         
         for l in landmarks() {
             let ta = TreasureAnnotation()
@@ -51,5 +54,11 @@ class Vaults: NSObject {
             totalPassedCount += 1
             ta.passed = true
         }
+        handleProgress()
+    }
+    
+    private func handleProgress() {
+        progress.updateAnnotations(amount: treasureAnnotations.count, totalPassedCount: totalPassedCount)
+        progress.save()
     }
 }

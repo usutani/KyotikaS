@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9703757A241A30E300C46D51 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97037579241A30E300C46D51 /* Progress.swift */; };
 		97383CA0241225E60076A135 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383C9F241225E60076A135 /* AppDelegate.swift */; };
 		97383CA2241225E60076A135 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CA1241225E60076A135 /* SceneDelegate.swift */; };
 		97383CA4241225E60076A135 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CA3241225E60076A135 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		97037579241A30E300C46D51 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		97383C9C241225E60076A135 /* KyotikaS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotikaS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97383C9F241225E60076A135 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97383CA1241225E60076A135 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				97383CC924122AEC0076A135 /* Vaults.sqlite */,
 				97383CCB24122B1A0076A135 /* Vaults.xcdatamodeld */,
 				9757DFFB2416365500DAA670 /* Vaults.swift */,
+				97037579241A30E300C46D51 /* Progress.swift */,
 				9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */,
 				979D9932241760A600E510DD /* TreasureAnnotationView.swift */,
 			);
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9703757A241A30E300C46D51 /* Progress.swift in Sources */,
 				979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */,
 				97383CA4241225E60076A135 /* ViewController.swift in Sources */,
 				97383CCD24122B1A0076A135 /* Vaults.xcdatamodeld in Sources */,
