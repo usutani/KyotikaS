@@ -12,7 +12,8 @@ import MapKit
 class TreasureAnnotationView: MKAnnotationView {
     
     var blinker: CALayer!
-    
+    var locker: CALayer!
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,11 +47,18 @@ class TreasureAnnotationView: MKAnnotationView {
     func startAnimation() {
         let ta = self.annotation as! TreasureAnnotation
         if ta.passed {
-            blinker.removeFromSuperlayer()
-            blinker = nil
+            if blinker != nil {
+                blinker.removeFromSuperlayer()
+                blinker = nil
+            }
+            if locker != nil {
+                locker.removeFromSuperlayer()
+                locker = nil
+            }
             image = UIImage(named: "Landmark")
             return
         }
+        
         let ka = CAKeyframeAnimation(keyPath: "contentsRect")
         ka.values = animationRectValues()
         ka.calculationMode = .discrete
@@ -58,6 +66,21 @@ class TreasureAnnotationView: MKAnnotationView {
         ka.repeatCount = Float.infinity
         ka.isRemovedOnCompletion = false
         blinker.add(ka, forKey: "blinker")
+        
+        if ta.locking {
+            locker = CALayer()
+            locker.contentsScale = UIScreen.main.scale
+            locker.frame = layer.bounds
+            locker.contents = UIImage(named: "Lock")?.cgImage
+            locker.contentsGravity = .center
+            layer.addSublayer(locker)
+        }
+        else {
+            if locker != nil {
+                locker.removeFromSuperlayer()
+                locker = nil
+            }
+        }
     }
     
     private func animationRectValues() -> [NSValue] {

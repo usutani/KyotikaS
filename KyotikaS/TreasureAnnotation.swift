@@ -21,4 +21,7 @@ class TreasureAnnotation: MKPointAnnotation {
             landmark.passed = newValue as NSNumber
         }
     }
+    var locking: Bool {
+        return true
+    }
 }
