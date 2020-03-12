@@ -55,10 +55,16 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let tav = view as? TreasureAnnotationView {
-            print(tav.annotation?.coordinate ?? "")
             if let ta = tav.annotation as? TreasureAnnotation {
-                print(ta.landmark.name ?? "")
-                print(ta.landmark.question ?? "")
+                if ta.passed {
+                    os_log("TreasureAnnotation is passed. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
+                    return
+                }
+                if ta.locking {
+                    os_log("TreasureAnnotation is locking. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
+                    return
+                }
+                // クイズをひ表示する。
                 if let vc = storyboard?.instantiateViewController(withIdentifier: "QuizTableViewController") as? QuizTableViewController {
                     vc.question = ta.landmark.question ?? ""
                     vc.answers.append(ta.landmark.answer1 ?? "")
@@ -84,11 +90,20 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             os_log("view.userRef is not setted.", log: OSLog.default, type: .error)
             return
         }
+        
+        treasureAnnotation.lastAtackDate = Date()
+        
         let correct = (treasureAnnotation.landmark.correct?.intValue ?? 0) - 1
         if (view.selectedIndex == correct) {
             vaults.setPassedAnnotation(treasureAnnotation)
-            let v = mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
-            v.startAnimation()
         }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + TreasureAnnotation.PENALTY_DURATION + 0.2) {
+                let v = self.mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
+                v.startAnimation()
+            }
+        }
+        let v = mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
+        v.startAnimation()
     }
 }

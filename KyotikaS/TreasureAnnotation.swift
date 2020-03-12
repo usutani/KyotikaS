@@ -11,6 +11,9 @@ import MapKit
 
 class TreasureAnnotation: MKPointAnnotation {
     
+    // MARK: Constants
+    static let PENALTY_DURATION = 120.0
+    
     // MARK: Properties
     var landmark: Landmark!
     var passed: Bool {
@@ -21,7 +24,18 @@ class TreasureAnnotation: MKPointAnnotation {
             landmark.passed = newValue as NSNumber
         }
     }
+    var lastAtackDate: Date? = nil
     var locking: Bool {
-        return true
+        if passed {
+            return false
+        }
+        if lastAtackDate == nil {
+            return false
+        }
+        let timeInterval = Date().timeIntervalSince(lastAtackDate!)
+        if timeInterval < TreasureAnnotation.PENALTY_DURATION {
+            return true
+        }
+        return false
     }
 }
