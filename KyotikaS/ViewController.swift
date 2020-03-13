@@ -26,6 +26,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         super.viewDidLoad()
         
         vaults = Vaults()
+        vaults.makeArea(region: ViewController.REGION_KYOTO)
         
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
