@@ -26,6 +26,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         super.viewDidLoad()
         
         vaults = Vaults()
+        vaults.makeArea(region: ViewController.REGION_KYOTO)
         
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
@@ -34,8 +35,21 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     //MARK: MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        // 現時点では全てのお宝を表示する。状態に応じた画像表示もなし。
-        mapView.addAnnotations(vaults.treasureAnnotations)
+//        mapView.addAnnotations(vaults.treasureAnnotations)
+        
+        let array = mapView.annotations
+        let set = NSMutableSet(array: array)
+        let treasureAnnotations = vaults.treasureAnnotationsInRegion(region: mapView.region)
+        set.minus(treasureAnnotations as! Set<AnyHashable>)
+        
+        if set.count > 0 {
+            mapView.removeAnnotations(set.allObjects as! [MKAnnotation])
+        }
+        treasureAnnotations.minus(NSSet(array: array) as! Set<AnyHashable>)
+        
+        if treasureAnnotations.count > 0 {
+            mapView.addAnnotations(treasureAnnotations.allObjects as! [MKAnnotation])
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -47,6 +61,16 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
                 av = TreasureAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             }
             av?.annotation = annotation
+            (av as! TreasureAnnotationView).startAnimation()
+            return av
+        case is AreaAnnotation:
+            let reuseId = "AreaAnnotation"
+            var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+            if av == nil {
+                av = AreaAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            }
+            av?.annotation = annotation
+            (av as! AreaAnnotationView).startAnimation()
             return av
         default:
             return nil
@@ -105,5 +129,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         }
         let v = mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
         v.startAnimation()
+        
+        os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
     }
 }

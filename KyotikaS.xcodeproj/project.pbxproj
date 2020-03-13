@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9703757A241A30E300C46D51 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97037579241A30E300C46D51 /* Progress.swift */; };
+		97158B9D241B1D390025D97F /* AreaAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97158B9C241B1D390025D97F /* AreaAnnotation.swift */; };
 		97383CA0241225E60076A135 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383C9F241225E60076A135 /* AppDelegate.swift */; };
 		97383CA2241225E60076A135 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CA1241225E60076A135 /* SceneDelegate.swift */; };
 		97383CA4241225E60076A135 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CA3241225E60076A135 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 		97383CBA241225E70076A135 /* KyotikaSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97383CB9241225E70076A135 /* KyotikaSTests.swift */; };
 		97383CCA24122AEC0076A135 /* Vaults.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 97383CC924122AEC0076A135 /* Vaults.sqlite */; };
 		97383CCD24122B1A0076A135 /* Vaults.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 97383CCB24122B1A0076A135 /* Vaults.xcdatamodeld */; };
+		9739A771241B764A0090E055 /* AreaAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9739A770241B764A0090E055 /* AreaAnnotationView.swift */; };
 		9757DFFC2416365500DAA670 /* Vaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFB2416365500DAA670 /* Vaults.swift */; };
 		9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */; };
 		979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D9932241760A600E510DD /* TreasureAnnotationView.swift */; };
@@ -35,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		97037579241A30E300C46D51 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		97158B9C241B1D390025D97F /* AreaAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaAnnotation.swift; sourceTree = "<group>"; };
 		97383C9C241225E60076A135 /* KyotikaS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotikaS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97383C9F241225E60076A135 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97383CA1241225E60076A135 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		97383CBB241225E70076A135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97383CC924122AEC0076A135 /* Vaults.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vaults.sqlite; sourceTree = "<group>"; };
 		97383CCC24122B1A0076A135 /* Vaults.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vaults.xcdatamodel; sourceTree = "<group>"; };
+		9739A770241B764A0090E055 /* AreaAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaAnnotationView.swift; sourceTree = "<group>"; };
 		9757DFFB2416365500DAA670 /* Vaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaults.swift; sourceTree = "<group>"; };
 		9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotation.swift; sourceTree = "<group>"; };
 		979D9932241760A600E510DD /* TreasureAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotationView.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				97037579241A30E300C46D51 /* Progress.swift */,
 				9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */,
 				979D9932241760A600E510DD /* TreasureAnnotationView.swift */,
+				97158B9C241B1D390025D97F /* AreaAnnotation.swift */,
+				9739A770241B764A0090E055 /* AreaAnnotationView.swift */,
 			);
 			path = KyotikaS;
 			sourceTree = "<group>";
@@ -223,8 +229,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9703757A241A30E300C46D51 /* Progress.swift in Sources */,
+				97158B9D241B1D390025D97F /* AreaAnnotation.swift in Sources */,
 				979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */,
 				97383CA4241225E60076A135 /* ViewController.swift in Sources */,
+				9739A771241B764A0090E055 /* AreaAnnotationView.swift in Sources */,
 				97383CCD24122B1A0076A135 /* Vaults.xcdatamodeld in Sources */,
 				9757DFFC2416365500DAA670 /* Vaults.swift in Sources */,
 				97383CA0241225E60076A135 /* AppDelegate.swift in Sources */,

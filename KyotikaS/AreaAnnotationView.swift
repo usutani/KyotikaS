@@ -1,19 +1,18 @@
 //
-//  TreasureAnnotationView.swift
+//  AreaAnnotationView.swift
 //  KyotikaS
 //
-//  Created by Yasuhiro Usutani on 2020/03/10.
+//  Created by Yasuhiro Usutani on 2020/03/13.
 //  Copyright © 2020 toolstudio. All rights reserved.
 //
 
 import UIKit
 import MapKit
 
-class TreasureAnnotationView: MKAnnotationView {
+class AreaAnnotationView: MKAnnotationView {
     
     var blinker: CALayer!
-    var locker: CALayer!
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -27,8 +26,8 @@ class TreasureAnnotationView: MKAnnotationView {
     }
     
     private func initFrameSize() {
-        frame.size.width = 48
-        frame.size.height = 48
+        frame.size.width = 24
+        frame.size.height = 24
     }
     
     private func initBlinker() {
@@ -37,7 +36,7 @@ class TreasureAnnotationView: MKAnnotationView {
         }
         blinker = CALayer()
         blinker.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
-        blinker.contents = UIImage(named: "Shines")?.cgImage
+        blinker.contents = UIImage(named: "Ggg")?.cgImage
         blinker.contentsRect = animationRects()[0]
 
         layer.cornerRadius = frame.size.width / 2
@@ -45,40 +44,13 @@ class TreasureAnnotationView: MKAnnotationView {
     }
     
     func startAnimation() {
-        let ta = self.annotation as! TreasureAnnotation
-        if ta.passed {
-            if blinker != nil {
-                blinker.removeFromSuperlayer()
-            }
-            if locker != nil {
-                locker.removeFromSuperlayer()
-            }
-            image = UIImage(named: "Landmark")
-            return
-        }
-        
         let ka = CAKeyframeAnimation(keyPath: "contentsRect")
         ka.values = animationRectValues()
         ka.calculationMode = .discrete
-        ka.duration = 1
+        ka.duration = 0.3
         ka.repeatCount = Float.infinity
         ka.isRemovedOnCompletion = false
         blinker.add(ka, forKey: "blinker")
-        
-        if ta.locking {
-            locker = CALayer()
-            locker.contentsScale = UIScreen.main.scale
-            locker.frame = layer.bounds
-            locker.contents = UIImage(named: "Lock")?.cgImage
-            locker.contentsGravity = .center
-            layer.addSublayer(locker)
-        }
-        else {
-            if locker != nil {
-                locker.removeFromSuperlayer()
-                locker = nil
-            }
-        }
     }
     
     private func animationRectValues() -> [NSValue] {
@@ -87,11 +59,8 @@ class TreasureAnnotationView: MKAnnotationView {
     
     private func animationRects() -> [CGRect] {
         return [
-            CGRect(x: 0.0, y: 0, width: 0.2, height: 1),
-            CGRect(x: 0.2, y: 0, width: 0.2, height: 1),
-            CGRect(x: 0.4, y: 0, width: 0.2, height: 1),
-            CGRect(x: 0.6, y: 0, width: 0.2, height: 1),
-            CGRect(x: 0.8, y: 0, width: 0.2, height: 1),
+            CGRect(x: 0.0, y: 0, width: 0.5, height: 1),
+            CGRect(x: 0.5, y: 0, width: 0.5, height: 1),
         ]
     }
 }
