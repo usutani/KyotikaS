@@ -56,6 +56,9 @@ class TreasureAnnotationView: MKAnnotationView {
             image = UIImage(named: "Landmark")
             return
         }
+        else {
+            image = nil
+        }
         
         let ka = CAKeyframeAnimation(keyPath: "contentsRect")
         ka.values = animationRectValues()
