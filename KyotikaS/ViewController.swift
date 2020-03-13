@@ -64,7 +64,14 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             (av as! TreasureAnnotationView).startAnimation()
             return av
         case is AreaAnnotation:
-            return nil
+            let reuseId = "AreaAnnotation"
+            var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+            if av == nil {
+                av = AreaAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            }
+            av?.annotation = annotation
+            (av as! AreaAnnotationView).startAnimation()
+            return av
         default:
             return nil
         }
