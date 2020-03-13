@@ -35,8 +35,21 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     //MARK: MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        // 現時点では全てのお宝を表示する。状態に応じた画像表示もなし。
-        mapView.addAnnotations(vaults.treasureAnnotations)
+//        mapView.addAnnotations(vaults.treasureAnnotations)
+        
+        let array = mapView.annotations
+        let set = NSMutableSet(array: array)
+        let treasureAnnotations = vaults.treasureAnnotationsInRegion(region: mapView.region)
+        set.minus(treasureAnnotations as! Set<AnyHashable>)
+        
+        if set.count > 0 {
+            mapView.removeAnnotations(set.allObjects as! [MKAnnotation])
+        }
+        treasureAnnotations.minus(NSSet(array: array) as! Set<AnyHashable>)
+        
+        if treasureAnnotations.count > 0 {
+            mapView.addAnnotations(treasureAnnotations.allObjects as! [MKAnnotation])
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -48,7 +61,10 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
                 av = TreasureAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             }
             av?.annotation = annotation
+            (av as! TreasureAnnotationView).startAnimation()
             return av
+        case is AreaAnnotation:
+            return nil
         default:
             return nil
         }

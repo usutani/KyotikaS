@@ -13,6 +13,9 @@ import os.log
 
 class Vaults: NSObject {
     
+    // MARK: Constants
+    static let KMVaultsAreaThresholdSpan: CLLocationDistance = 2000
+    
     // MARK: Properties
     var moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var treasureAnnotations: [TreasureAnnotation] = []
@@ -112,5 +115,79 @@ class Vaults: NSObject {
             }
         }
         return groupAnnotations
+    }
+    
+    // 指定された領域のTreasureAnnotationのセット
+    func treasureAnnotationsInRegion(region: MKCoordinateRegion) -> NSMutableSet {
+//        return NSSet(array: treasureAnnotations)
+        
+        // FIXME
+        // 現時点ではピンアノテーションが表示されている。
+        // お宝かゴゴゴかのダウンキャストが必要か？
+        
+        let set = NSMutableSet()
+        let r = Region(region)
+        
+        let index = Vaults.gropuIndexForRegion(region)
+        if index > 0 {
+            let garray = groupAnnotations[index].allValues as! [MKPointAnnotation]
+            for a in garray {
+                if r.coordinateInRegion(a.coordinate) {
+                    set.add(a)
+                }
+            }
+            return set
+        }
+        
+        for a in treasureAnnotations {
+            set.add(a)
+        }
+        
+        return set
+    }
+    
+    private class func gropuIndexForRegion(_ region: MKCoordinateRegion) -> Int {
+        var index = -1
+        var thresholdSpan = KMVaultsAreaThresholdSpan
+        
+        while index < 2 {
+            let threshold = MKCoordinateRegion(center: region.center, latitudinalMeters: thresholdSpan, longitudinalMeters: thresholdSpan)
+            if region.span.longitudeDelta < threshold.span.longitudeDelta {
+                break
+            }
+            index += 1
+            thresholdSpan *= 2
+        }
+        return index;
+    }
+}
+
+struct Region {
+    var minlatitude: CLLocationDegrees
+    var maxlatitude: CLLocationDegrees
+    var minlongitude: CLLocationDegrees
+    var maxlongitude: CLLocationDegrees
+    
+    init (_ region: MKCoordinateRegion) {
+        minlatitude = region.center.latitude - region.span.latitudeDelta
+        maxlatitude = region.center.latitude + region.span.latitudeDelta
+        minlongitude = region.center.longitude - region.span.longitudeDelta
+        maxlongitude = region.center.longitude + region.span.longitudeDelta
+    }
+    
+    func coordinateInRegion(_ coordinate: CLLocationCoordinate2D) -> Bool {
+        if coordinate.longitude < minlongitude {
+            return false
+        }
+        if coordinate.longitude > maxlongitude {
+            return false
+        }
+        if coordinate.latitude < minlatitude {
+            return false
+        }
+        if coordinate.latitude > maxlatitude {
+            return false
+        }
+        return true
     }
 }

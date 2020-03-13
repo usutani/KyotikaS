@@ -39,7 +39,7 @@ class TreasureAnnotationView: MKAnnotationView {
         blinker.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
         blinker.contents = UIImage(named: "Shines")?.cgImage
         blinker.contentsRect = animationRects()[0]
-        
+
         layer.cornerRadius = frame.size.width / 2
         layer.addSublayer(blinker)
     }
@@ -49,11 +49,9 @@ class TreasureAnnotationView: MKAnnotationView {
         if ta.passed {
             if blinker != nil {
                 blinker.removeFromSuperlayer()
-                blinker = nil
             }
             if locker != nil {
                 locker.removeFromSuperlayer()
-                locker = nil
             }
             image = UIImage(named: "Landmark")
             return
