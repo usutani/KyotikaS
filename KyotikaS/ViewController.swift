@@ -129,5 +129,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         }
         let v = mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
         v.startAnimation()
+        
+        os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
     }
 }
