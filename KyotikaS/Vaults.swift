@@ -118,7 +118,7 @@ class Vaults: NSObject {
     }
     
     // 指定された領域のTreasureAnnotationのセット
-    func treasureAnnotationsInRegion(region: MKCoordinateRegion, hunter:CLLocationCoordinate2D) -> NSMutableSet {
+    func treasureAnnotationsInRegion(region: MKCoordinateRegion, hunter:CLLocationCoordinate2D) -> (treasureAnnotations: NSMutableSet, hitAnnotation: TreasureAnnotation?) {
         let set = NSMutableSet()
         let r = Region(region)
         
@@ -130,11 +130,14 @@ class Vaults: NSObject {
                     set.add(a)
                 }
             }
-            return set
+            return (set, nil)
         }
         
         let nearThresholdMeter: CLLocationDistance  = 500.0  // 基本の近接範囲 m
         let peekregion = Region(MKCoordinateRegion(center: hunter, latitudinalMeters: nearThresholdMeter, longitudinalMeters: nearThresholdMeter))
+        let hr = hitRegion(region: region, hunter: hunter)
+        
+        var hitAnnotation: TreasureAnnotation? = nil
         for a in treasureAnnotations {
             if !r.coordinateInRegion(a.coordinate) {
                 continue
@@ -142,10 +145,40 @@ class Vaults: NSObject {
             if !peekregion.coordinateInRegion(a.coordinate) {
                 continue
             }
+            if hitAnnotation == nil {
+                hitAnnotation = hitAnnotationCheck(treasureAnnotation: a, hitRegion: hr)
+            }
             set.add(a)
         }
         
-        return set
+        return (set, hitAnnotation)
+    }
+    
+    private func hitRegion(region: MKCoordinateRegion, hunter:CLLocationCoordinate2D) -> Region {
+        let hitThresholdMeter: CLLocationDistance  = 30.0  // 接触とみなす範囲 m
+        var hitregion = MKCoordinateRegion(center: hunter, latitudinalMeters: hitThresholdMeter, longitudinalMeters: hitThresholdMeter)
+        let minlatitudeDelta = region.span.latitudeDelta / 15
+        let minlongitudeDelta = region.span.longitudeDelta / 15
+        if hitregion.span.latitudeDelta < minlatitudeDelta {
+            hitregion.span.latitudeDelta = minlatitudeDelta
+        }
+        if hitregion.span.longitudeDelta < minlongitudeDelta {
+            hitregion.span.longitudeDelta = minlongitudeDelta;
+        }
+        return Region(hitregion)
+    }
+    
+    private func hitAnnotationCheck(treasureAnnotation: TreasureAnnotation, hitRegion: Region) -> TreasureAnnotation? {
+        if treasureAnnotation.passed {
+            return nil
+        }
+        if treasureAnnotation.locking {
+            return nil
+        }
+        if !hitRegion.coordinateInRegion(treasureAnnotation.coordinate) {
+            return nil
+        }
+        return treasureAnnotation
     }
     
     class func gropuIndexForRegion(_ region: MKCoordinateRegion) -> Int {

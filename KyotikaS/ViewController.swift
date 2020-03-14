@@ -54,7 +54,8 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         
         let array = mapView.annotations
         let set = NSMutableSet(array: array)
-        let treasureAnnotations = vaults.treasureAnnotationsInRegion(region: mapView.region, hunter: treasureHunterAnnotation.coordinate)
+        let result = vaults.treasureAnnotationsInRegion(region: mapView.region, hunter: treasureHunterAnnotation.coordinate)
+        let treasureAnnotations = result.treasureAnnotations
         set.minus(treasureAnnotations as! Set<AnyHashable>)
         
         if let tha = treasureHunterAnnotation {
