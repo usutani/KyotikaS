@@ -21,12 +21,19 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     @IBOutlet weak var mapView: MKMapView!
     var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var vaults: Vaults! = nil
+    var treasureHunterAnnotation: TreasureHunterAnnotation! = nil
+    var treasurehunterAnnotationView: TreasureHunterAnnotationView! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         vaults = Vaults()
         vaults.makeArea(region: ViewController.REGION_KYOTO)
+        
+        // ハンター追加
+        treasureHunterAnnotation = TreasureHunterAnnotation()
+        treasureHunterAnnotation.coordinate = ViewController.LOC_COORD_JR_KYOTO_STATION
+        mapView.addAnnotation(treasureHunterAnnotation)
         
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
@@ -37,11 +44,22 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
 //        mapView.addAnnotations(vaults.treasureAnnotations)
         
+        // ハンター
+        let gi = Vaults.gropuIndexForRegion(mapView.region)
+        treasurehunterAnnotationView.showRadar = (gi <= 0)
+        let destinationLocation = mapView.centerCoordinate
+        UIView.animate(withDuration: 0.2, animations: {
+            self.treasureHunterAnnotation.coordinate = destinationLocation
+        }, completion: nil)
+        
         let array = mapView.annotations
         let set = NSMutableSet(array: array)
         let treasureAnnotations = vaults.treasureAnnotationsInRegion(region: mapView.region)
         set.minus(treasureAnnotations as! Set<AnyHashable>)
         
+        if let tha = treasureHunterAnnotation {
+            set.remove(tha)
+        }
         if set.count > 0 {
             mapView.removeAnnotations(set.allObjects as! [MKAnnotation])
         }
@@ -71,6 +89,18 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             }
             av?.annotation = annotation
             (av as! AreaAnnotationView).startAnimation()
+            return av
+        case is TreasureHunterAnnotation:
+            let reuseId = "TreasureHunterAnnotation"
+            var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+            if av == nil {
+                av = TreasureHunterAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            }
+            av?.annotation = annotation
+            if let thav = av as? TreasureHunterAnnotationView {
+                thav.standbyNero = false
+                treasurehunterAnnotationView = thav
+            }
             return av
         default:
             return nil

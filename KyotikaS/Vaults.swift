@@ -119,12 +119,6 @@ class Vaults: NSObject {
     
     // 指定された領域のTreasureAnnotationのセット
     func treasureAnnotationsInRegion(region: MKCoordinateRegion) -> NSMutableSet {
-//        return NSSet(array: treasureAnnotations)
-        
-        // FIXME
-        // 現時点ではピンアノテーションが表示されている。
-        // お宝かゴゴゴかのダウンキャストが必要か？
-        
         let set = NSMutableSet()
         let r = Region(region)
         
@@ -146,7 +140,7 @@ class Vaults: NSObject {
         return set
     }
     
-    private class func gropuIndexForRegion(_ region: MKCoordinateRegion) -> Int {
+    class func gropuIndexForRegion(_ region: MKCoordinateRegion) -> Int {
         var index = -1
         var thresholdSpan = KMVaultsAreaThresholdSpan
         
