@@ -23,6 +23,7 @@ class TreasureAnnotationView: MKAnnotationView {
         isOpaque = false
         initFrameSize()
         initBlinker()
+        initLocker()
         startAnimation()
     }
     
@@ -42,6 +43,17 @@ class TreasureAnnotationView: MKAnnotationView {
 
         layer.cornerRadius = frame.size.width / 2
         layer.addSublayer(blinker)
+    }
+    
+    private func initLocker() {
+        if locker != nil {
+            locker.removeFromSuperlayer()
+        }
+        locker = CALayer()
+        locker.contentsScale = UIScreen.main.scale
+        locker.frame = layer.bounds
+        locker.contents = UIImage(named: "Lock")?.cgImage
+        locker.contentsGravity = .center
     }
     
     func startAnimation() {
@@ -69,18 +81,10 @@ class TreasureAnnotationView: MKAnnotationView {
         blinker.add(ka, forKey: "blinker")
         
         if ta.locking {
-            locker = CALayer()
-            locker.contentsScale = UIScreen.main.scale
-            locker.frame = layer.bounds
-            locker.contents = UIImage(named: "Lock")?.cgImage
-            locker.contentsGravity = .center
             layer.addSublayer(locker)
         }
         else {
-            if locker != nil {
-                locker.removeFromSuperlayer()
-                locker = nil
-            }
+            locker?.removeFromSuperlayer()
         }
     }
     
