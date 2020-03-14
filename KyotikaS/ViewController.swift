@@ -11,6 +11,10 @@ import CoreData
 import os.log
 import MapKit
 
+extension Notification.Name {
+    static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
+}
+
 class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate {
     
     // MARK: Constants
@@ -23,6 +27,19 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     var vaults: Vaults! = nil
     var treasureHunterAnnotation: TreasureHunterAnnotation! = nil
     var treasurehunterAnnotationView: TreasureHunterAnnotationView! = nil
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(type(of: self).notified(notification:)), name: .hitTreasureNotification, object: nil)
+    }
+    
+    @objc private func notified(notification: Notification) {
+        if let ta = notification.object as? TreasureAnnotation {
+            hitTreasureAnnotation(ta)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +86,10 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         if treasureAnnotations.count > 0 {
             mapView.addAnnotations(treasureAnnotations.allObjects as! [MKAnnotation])
         }
+        
+        if let hitAnnotation = result.hitAnnotation {
+            hitAnnotation.notificationHitIfNeed()
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -111,30 +132,38 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let tav = view as? TreasureAnnotationView {
             if let ta = tav.annotation as? TreasureAnnotation {
-                if ta.passed {
-                    os_log("TreasureAnnotation is passed. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
-                    return
-                }
-                if ta.locking {
-                    os_log("TreasureAnnotation is locking. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
-                    return
-                }
-                // クイズを表示する。
-                if let vc = storyboard?.instantiateViewController(withIdentifier: "QuizTableViewController") as? QuizTableViewController {
-                    vc.question = ta.landmark.question ?? ""
-                    vc.answers.append(ta.landmark.answer1 ?? "")
-                    vc.answers.append(ta.landmark.answer2 ?? "")
-                    vc.answers.append(ta.landmark.answer3 ?? "")
-                    vc.userRef = ta
-                    vc.modalPresentationStyle = .fullScreen
-                    vc.delegate = self
-                    present(vc, animated: true, completion: nil)
-                }
+                hitTreasureAnnotation(ta)
             }
         }
         // 選択を解除
         for annotaion in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotaion, animated: false)
+        }
+    }
+    
+    func hitTreasureAnnotation(_ ta: TreasureAnnotation) {
+        if presentedViewController != nil {
+            return
+        }
+        
+        if ta.passed {
+            os_log("TreasureAnnotation is passed. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
+            return
+        }
+        if ta.locking {
+            os_log("TreasureAnnotation is locking. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
+            return
+        }
+        // クイズを表示する。
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "QuizTableViewController") as? QuizTableViewController {
+            vc.question = ta.landmark.question ?? ""
+            vc.answers.append(ta.landmark.answer1 ?? "")
+            vc.answers.append(ta.landmark.answer2 ?? "")
+            vc.answers.append(ta.landmark.answer3 ?? "")
+            vc.userRef = ta
+            vc.modalPresentationStyle = .fullScreen
+            vc.delegate = self
+            present(vc, animated: true, completion: nil)
         }
     }
     

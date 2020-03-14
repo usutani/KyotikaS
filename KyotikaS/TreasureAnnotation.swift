@@ -38,4 +38,14 @@ class TreasureAnnotation: MKPointAnnotation {
         }
         return false
     }
+    
+    func notificationHitIfNeed() {
+        // TODO find
+        
+        if locking {
+            return
+        }
+        let center = NotificationCenter.default
+        center.post(name: .hitTreasureNotification, object: self)
+    }
 }
