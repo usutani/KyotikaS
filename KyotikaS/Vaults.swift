@@ -118,7 +118,7 @@ class Vaults: NSObject {
     }
     
     // 指定された領域のTreasureAnnotationのセット
-    func treasureAnnotationsInRegion(region: MKCoordinateRegion) -> NSMutableSet {
+    func treasureAnnotationsInRegion(region: MKCoordinateRegion, hunter:CLLocationCoordinate2D) -> NSMutableSet {
         let set = NSMutableSet()
         let r = Region(region)
         
@@ -133,7 +133,15 @@ class Vaults: NSObject {
             return set
         }
         
+        let nearThresholdMeter: CLLocationDistance  = 500.0  // 基本の近接範囲 m
+        let peekregion = Region(MKCoordinateRegion(center: hunter, latitudinalMeters: nearThresholdMeter, longitudinalMeters: nearThresholdMeter))
         for a in treasureAnnotations {
+            if !r.coordinateInRegion(a.coordinate) {
+                continue
+            }
+            if !peekregion.coordinateInRegion(a.coordinate) {
+                continue
+            }
             set.add(a)
         }
         
