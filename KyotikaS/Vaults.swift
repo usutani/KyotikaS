@@ -60,7 +60,28 @@ class Vaults: NSObject {
             totalPassedCount += 1
             ta.passed = true
         }
+        handleSameTagAnnotation(ta)
         handleProgress()
+    }
+    
+    fileprivate func handleSameTagAnnotation(_ ta: TreasureAnnotation) {
+        var tagNames: [String] = []
+        for case let tag as Tag in ta.landmark.tags! {
+            if let tagName = tag.name {
+                tagNames.append(tagName)
+            }
+        }
+        print(tagNames)
+        for tagName in tagNames {
+            for ta in treasureAnnotations {
+                for case let tag as Tag in ta.landmark.tags! {
+                    if tagName == tag.name {
+                        print(ta.landmark.name ?? "N/A")
+                        ta.find = true
+                    }
+                }
+            }
+        }
     }
     
     private func handleProgress() {
@@ -142,9 +163,18 @@ class Vaults: NSObject {
             if !r.coordinateInRegion(a.coordinate) {
                 continue
             }
+            if a.find {
+                if hitAnnotation == nil {
+                    hitAnnotation = hitAnnotationCheck(treasureAnnotation: a, hitRegion: hr)
+                }
+                set.add(a)
+                continue
+            }
             if !peekregion.coordinateInRegion(a.coordinate) {
                 continue
             }
+            // nearThresholdMeter内なので無条件に発見（find）フラグをたてる。
+            a.find = true
             if hitAnnotation == nil {
                 hitAnnotation = hitAnnotationCheck(treasureAnnotation: a, hitRegion: hr)
             }

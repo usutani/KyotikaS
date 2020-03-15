@@ -38,10 +38,19 @@ class TreasureAnnotation: MKPointAnnotation {
         }
         return false
     }
+    var find: Bool {
+        get {
+            return landmark.found!.boolValue
+        }
+        set(newValue) {
+            landmark.found = newValue as NSNumber
+        }
+    }
     
     func notificationHitIfNeed() {
-        // TODO find
-        
+        if !find {
+            return
+        }
         if locking {
             return
         }
