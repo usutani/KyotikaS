@@ -60,23 +60,40 @@ class Vaults: NSObject {
             totalPassedCount += 1
             ta.passed = true
         }
-        handleSameTagAnnotation(ta)
+        handleSameTagAnnotations(ta)
         handleProgress()
     }
     
-    fileprivate func handleSameTagAnnotation(_ ta: TreasureAnnotation) {
+    fileprivate func handleSameTagAnnotations(_ ta: TreasureAnnotation) {
+        if ta.landmark.tags?.count == 0 {
+            return
+        }
         var tagNames: [String] = []
         for case let tag as Tag in ta.landmark.tags! {
             if let tagName = tag.name {
                 tagNames.append(tagName)
             }
         }
-        print(tagNames)
+        let firstTagName = [tagNames[0]]    //　tagNamesが空の場合に使う。
+        
+        // 頻出のキーワードを除外する。
+        let keywords = ["寺社", "重要文化財", "国宝", "公共施設", "商業施設"]
+        for keyword in keywords {
+            for (index, tagName) in tagNames.enumerated() {
+                if tagName == keyword {
+                    tagNames.remove(at: index)
+                }
+            }
+        }
+        
+        // findをtrueにする。
+        if tagNames.count == 0 {
+            tagNames = firstTagName
+        }
         for tagName in tagNames {
             for ta in treasureAnnotations {
                 for case let tag as Tag in ta.landmark.tags! {
                     if tagName == tag.name {
-                        print(ta.landmark.name ?? "N/A")
                         ta.find = true
                     }
                 }
