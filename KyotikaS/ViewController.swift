@@ -135,6 +135,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
                 hitTreasureAnnotation(ta)
             }
         }
+        if view is TreasureHunterAnnotationView {
+            hitTreasureHunterAnnotation()
+        }
         // 選択を解除
         for annotaion in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotaion, animated: false)
@@ -163,6 +166,13 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             vc.userRef = ta
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func hitTreasureHunterAnnotation() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultsViewController") as? VaultsViewController {
+            vc.treasureAnnotations = vaults.treasureAnnotations
             present(vc, animated: true, completion: nil)
         }
     }
