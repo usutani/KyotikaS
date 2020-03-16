@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol VaultsViewControllerDelegate : NSObjectProtocol {
+    func showLocation(_ ta: TreasureAnnotation)
+}
+
 class VaultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: Properties
     var treasureAnnotations: [TreasureAnnotation] = []
     @IBOutlet weak var navBar: UINavigationBar!
+    weak var delegate: VaultsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +48,11 @@ class VaultsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         v.addSubview(l)
         return v
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true, completion: nil)
+        delegate?.showLocation(treasureAnnotations[indexPath.row])
     }
     
     // MARK: UITableViewDataSource

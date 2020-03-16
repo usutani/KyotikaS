@@ -46,6 +46,7 @@ class TreasureAnnotation: MKPointAnnotation {
             landmark.found = newValue as NSNumber
         }
     }
+    var target: Bool = false
     
     func notificationHitIfNeed() {
         if !find {
