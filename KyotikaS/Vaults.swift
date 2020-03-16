@@ -168,6 +168,13 @@ class Vaults: NSObject {
                     set.add(a)
                 }
             }
+            // 発見したお宝の場所だけではなく、発見前でも選択されたものは追加する。
+            for ta in treasureAnnotations {
+                if !ta.target {
+                    continue
+                }
+                set.add(ta)
+            }
             return (set, nil)
         }
         
@@ -180,7 +187,8 @@ class Vaults: NSObject {
             if !r.coordinateInRegion(a.coordinate) {
                 continue
             }
-            if a.find {
+            // 発見したお宝の場所だけではなく、発見前でも選択されたものは追加する。
+            if a.find || a.target {
                 if hitAnnotation == nil {
                     hitAnnotation = hitAnnotationCheck(treasureAnnotation: a, hitRegion: hr)
                 }
