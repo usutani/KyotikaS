@@ -196,12 +196,14 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         }
         else {
             DispatchQueue.main.asyncAfter(deadline: .now() + TreasureAnnotation.PENALTY_DURATION + 0.2) {
-                let v = self.mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
-                v.startAnimation()
+                if let v = self.mapView.view(for: treasureAnnotation) as? TreasureAnnotationView {
+                    v.startAnimation()
+                }
             }
         }
-        let v = mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
-        v.startAnimation()
+        if let v = mapView.view(for: treasureAnnotation) as? TreasureAnnotationView {
+            v.startAnimation()
+        }
         
         os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
     }
