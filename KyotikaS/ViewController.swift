@@ -15,7 +15,7 @@ extension Notification.Name {
     static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
 }
 
-class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultsViewControllerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -27,6 +27,8 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     var vaults: Vaults! = nil
     var treasureHunterAnnotation: TreasureHunterAnnotation! = nil
     var treasurehunterAnnotationView: TreasureHunterAnnotationView! = nil
+    var targets: [TreasureAnnotation] = []
+    var stopTargetModeButton: UIView? = nil
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -135,6 +137,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
                 hitTreasureAnnotation(ta)
             }
         }
+        if view is TreasureHunterAnnotationView {
+            hitTreasureHunterAnnotation()
+        }
         // 選択を解除
         for annotaion in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotaion, animated: false)
@@ -167,6 +172,14 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         }
     }
     
+    func hitTreasureHunterAnnotation() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultsViewController") as? VaultsViewController {
+            vc.treasureAnnotations = vaults.treasureAnnotations
+            vc.delegate = self
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
     //MARK: QuizTableViewControllerDelegate
     
     func quizTableViewControllerAnswer(_ view: QuizTableViewController) {
@@ -183,13 +196,161 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         }
         else {
             DispatchQueue.main.asyncAfter(deadline: .now() + TreasureAnnotation.PENALTY_DURATION + 0.2) {
-                let v = self.mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
-                v.startAnimation()
+                if let v = self.mapView.view(for: treasureAnnotation) as? TreasureAnnotationView {
+                    v.startAnimation()
+                }
             }
         }
-        let v = mapView.view(for: treasureAnnotation) as! TreasureAnnotationView
-        v.startAnimation()
+        if let v = mapView.view(for: treasureAnnotation) as? TreasureAnnotationView {
+            v.startAnimation()
+        }
         
         os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
+    }
+    
+    // MARK: VaultsViewControllerDelegate
+    
+    func showTargetLocations(_ ta: TreasureAnnotation) {
+        stopTargetMode()
+        startTargetMode(title: ta.passed ? ta.landmark.name : "?")
+        
+        vaults.treasureAnnotations.forEach { $0.target = false }
+        ta.target = true
+        targets = [ta]
+        
+        if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
+            tav.startAnimation()
+        }
+        showAllTarget(targets)
+    }
+    
+    fileprivate func startTargetMode(title: String?) {
+        let topBarOffset: CGFloat = 40
+        
+        var frame = view.bounds
+        frame.size.height = 44 + topBarOffset
+        stopTargetModeButton = UIView(frame: frame)
+        stopTargetModeButton?.backgroundColor = UIColor(hue: 0.6, saturation: 1, brightness: 0.2, alpha: 0.8)
+        let tgr = UITapGestureRecognizer(target: self, action: #selector(type(of: self).stopTargetMode))
+        stopTargetModeButton?.addGestureRecognizer(tgr)
+        view.addSubview(stopTargetModeButton!)
+        
+        frame = stopTargetModeButton!.bounds
+        frame.origin.y += 4
+        frame.origin.y += topBarOffset
+        frame.size.height = 20
+        let titleLabel = UILabel(frame: frame)
+        stopTargetModeButton?.addSubview(titleLabel)
+        titleLabel.backgroundColor = .clear
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.textAlignment = .center
+        titleLabel.font = .systemFont(ofSize: 14)
+        titleLabel.textColor = .white
+        titleLabel.text = "スポットモード（\(title ?? "")）"
+        
+        frame.origin.y += frame.size.height
+        frame.size.height = 16
+        let subtitleLabel = UILabel(frame: frame)
+        stopTargetModeButton?.addSubview(subtitleLabel)
+        subtitleLabel.backgroundColor = .clear
+        subtitleLabel.text = "ここをタップすると通常モードに戻ります"
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.font = .systemFont(ofSize: 12)
+        subtitleLabel.textColor = .white
+    }
+    
+    @objc private func stopTargetMode() {
+        disableAllTargetLocations()
+        stopTargetModeButton?.removeFromSuperview()
+        stopTargetModeButton = nil;
+    }
+    
+    fileprivate func disableAllTargetLocations() {
+        for ta in targets {
+            ta.target = false
+            if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
+                tav.startAnimation()
+            }
+        }
+    }
+    
+    fileprivate func showAllTarget(_ targets: [TreasureAnnotation]) {
+        if targets.count == 0 {
+            return
+        }
+        // 必要な領域を決める
+        var curtRegion = mapView.region
+        // 地図中心が京都チカチカのエリア外なら修正
+        let hr = Region(ViewController.REGION_KYOTO)
+        if !hr.coordinateInRegion(curtRegion.center) {
+            curtRegion = ViewController.REGION_KYOTO
+        }
+        // 現在地を中心に、ターゲットに合わせて範囲を広げる。
+        let startDelta: CLLocationDegrees = 0.001
+        if curtRegion.span.latitudeDelta > startDelta {
+            curtRegion.span.latitudeDelta = startDelta
+        }
+        if curtRegion.span.longitudeDelta > startDelta {
+            curtRegion.span.longitudeDelta = startDelta
+        }
+        
+        let coordinate = curtRegion.center
+        var minlatitude = coordinate.latitude - curtRegion.span.latitudeDelta / 2
+        var maxlatitude = minlatitude + curtRegion.span.latitudeDelta / 2
+        var minlongitude = coordinate.longitude - curtRegion.span.longitudeDelta / 2
+        var maxlongitude = minlongitude + curtRegion.span.longitudeDelta / 2
+        for ta in targets {
+            let coordinate = ta.coordinate
+            if minlatitude > coordinate.latitude {
+                minlatitude = coordinate.latitude
+            }
+            else if maxlatitude < coordinate.latitude {
+                maxlatitude = coordinate.latitude
+            }
+            if minlongitude > coordinate.longitude {
+                minlongitude = coordinate.longitude
+            }
+            else if maxlongitude < coordinate.longitude {
+                maxlongitude = coordinate.longitude
+            }
+        }
+        // 設定する領域
+        let span = MKCoordinateSpan(latitudeDelta: maxlatitude - minlatitude, longitudeDelta: maxlongitude - minlongitude)
+        let center = CLLocationCoordinate2D(latitude: minlatitude + (span.latitudeDelta / 2), longitude: minlongitude + (span.longitudeDelta / 2))
+        var tmpRgn = MKCoordinateRegion(center: center, span: span)
+        // 領域がギリギリだとマークが切れてしまうので、4インチも考慮して大きめにする
+        let expandCoefficient = 1.3
+        tmpRgn.span.longitudeDelta *= expandCoefficient
+        tmpRgn.span.latitudeDelta *= expandCoefficient
+        
+        if isSameRgn(tmpRgn) {
+            mapView(mapView, regionDidChangeAnimated: false)
+        }
+        else {
+            mapView.setRegion(tmpRgn, animated: true)
+        }
+    }
+    
+    fileprivate func isSameRgn(_ region: MKCoordinateRegion) -> Bool {
+        let krgn = mapView.regionThatFits(region)
+        let mrgn = mapView.region
+        
+        if fabs(krgn.center.latitude - mrgn.center.latitude) > 0.0001 {
+            return false
+        }
+        if fabs(krgn.center.longitude - mrgn.center.longitude) > 0.0001 {
+            return false
+        }
+        if fabs(krgn.span.latitudeDelta - mrgn.span.latitudeDelta) > 0.0001 {
+            return false
+        }
+        if fabs(krgn.span.longitudeDelta - mrgn.span.longitudeDelta) > 0.0001 {
+            return false
+        }
+        return true
+    }
+    
+    func hideTargetLocations() {
+        stopTargetMode()
     }
 }

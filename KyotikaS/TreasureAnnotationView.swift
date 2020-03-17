@@ -22,7 +22,6 @@ class TreasureAnnotationView: MKAnnotationView {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         isOpaque = false
         initFrameSize()
-        initBlinker()
         initLocker()
         startAnimation()
     }
@@ -30,19 +29,6 @@ class TreasureAnnotationView: MKAnnotationView {
     private func initFrameSize() {
         frame.size.width = 48
         frame.size.height = 48
-    }
-    
-    private func initBlinker() {
-        if blinker != nil {
-            blinker.removeFromSuperlayer()
-        }
-        blinker = CALayer()
-        blinker.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
-        blinker.contents = UIImage(named: "Shines")?.cgImage
-        blinker.contentsRect = animationRects()[0]
-
-        layer.cornerRadius = frame.size.width / 2
-        layer.addSublayer(blinker)
     }
     
     private func initLocker() {
@@ -58,9 +44,10 @@ class TreasureAnnotationView: MKAnnotationView {
     
     func startAnimation() {
         let ta = self.annotation as! TreasureAnnotation
-        if ta.passed {
+        if ta.passed && !ta.target {
             if blinker != nil {
                 blinker.removeFromSuperlayer()
+                blinker = nil
             }
             if locker != nil {
                 locker.removeFromSuperlayer()
@@ -72,13 +59,42 @@ class TreasureAnnotationView: MKAnnotationView {
             image = nil
         }
         
-        let ka = CAKeyframeAnimation(keyPath: "contentsRect")
-        ka.values = animationRectValues()
-        ka.calculationMode = .discrete
-        ka.duration = 1
-        ka.repeatCount = Float.infinity
-        ka.isRemovedOnCompletion = false
-        blinker.add(ka, forKey: "blinker")
+        if blinker == nil {
+            blinker = CALayer()
+            blinker.frame = bounds
+            blinker.contentsScale = UIScreen.main.scale
+            layer.addSublayer(blinker)
+        }
+        if ta.target {
+            if ta.passed {
+                blinker.contents = UIImage(named: "LandmarkTargetPassed")?.cgImage
+            }
+            else {
+                blinker.contents = UIImage(named: "LandmarkTarget")?.cgImage
+            }
+            blinker.contentsRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+            let ba = CABasicAnimation()
+            ba.fromValue = NSValue(caTransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0))
+            ba.toValue =  NSValue(caTransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0))
+            ba.duration = 1
+            ba.isRemovedOnCompletion = false
+            ba.autoreverses = true
+            ba.repeatCount = Float.infinity
+            blinker.removeAnimation(forKey: "shine")
+            blinker.add(ba, forKey: "transform")
+        }
+        else {
+            blinker.contents = UIImage(named: "Shines")?.cgImage
+            blinker.contentsRect = animationRects()[0]
+            let ka = CAKeyframeAnimation(keyPath: "contentsRect")
+            ka.values = animationRectValues()
+            ka.calculationMode = .discrete
+            ka.duration = 1
+            ka.repeatCount = Float.infinity
+            ka.isRemovedOnCompletion = false
+            blinker.removeAnimation(forKey: "transform")
+            blinker.add(ka, forKey: "shine")
+        }
         
         if ta.locking {
             layer.addSublayer(locker)

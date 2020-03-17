@@ -38,6 +38,7 @@ class TreasureAnnotation: MKPointAnnotation {
         }
         return false
     }
+    // trueならお宝を地図に表示する。
     var find: Bool {
         get {
             return landmark.found!.boolValue
@@ -46,6 +47,8 @@ class TreasureAnnotation: MKPointAnnotation {
             landmark.found = newValue as NSNumber
         }
     }
+    // trueならお宝が選択されている。
+    var target: Bool = false
     
     func notificationHitIfNeed() {
         if !find {
