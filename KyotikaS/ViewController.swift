@@ -206,9 +206,12 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     // MARK: VaultsViewControllerDelegate
     
-    func showLocation(_ ta: TreasureAnnotation) {
+    func showTargetLocations(_ ta: TreasureAnnotation) {
         vaults.treasureAnnotations.forEach { $0.target = false }
         ta.target = true
+        if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
+            tav.startAnimation()
+        }
         showAllTarget([ta])
     }
     
@@ -286,5 +289,16 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             return false
         }
         return true
+    }
+    
+    func hideTargetLocations() {
+        for ta in vaults.treasureAnnotations {
+            if ta.target {
+                ta.target = false
+            }
+            if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
+                tav.startAnimation()
+            }
+        }
     }
 }

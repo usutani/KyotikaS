@@ -9,7 +9,8 @@
 import UIKit
 
 protocol VaultsViewControllerDelegate : NSObjectProtocol {
-    func showLocation(_ ta: TreasureAnnotation)
+    func showTargetLocations(_ ta: TreasureAnnotation)
+    func hideTargetLocations()
 }
 
 class VaultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -28,6 +29,7 @@ class VaultsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func done(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+        delegate?.hideTargetLocations()
     }
     
     // MARK: UITableViewDelegate
@@ -52,7 +54,8 @@ class VaultsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true, completion: nil)
-        delegate?.showLocation(treasureAnnotations[indexPath.row])
+        delegate?.hideTargetLocations()
+        delegate?.showTargetLocations(treasureAnnotations[indexPath.row])
     }
     
     // MARK: UITableViewDataSource
