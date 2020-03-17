@@ -27,6 +27,8 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     var vaults: Vaults! = nil
     var treasureHunterAnnotation: TreasureHunterAnnotation! = nil
     var treasurehunterAnnotationView: TreasureHunterAnnotationView! = nil
+    var targets: [TreasureAnnotation] = []
+    var stopTargetModeButton: UIView? = nil
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -207,12 +209,67 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     // MARK: VaultsViewControllerDelegate
     
     func showTargetLocations(_ ta: TreasureAnnotation) {
+        stopTargetMode()
+        startTargetMode(title: ta.passed ? ta.landmark.name : "?")
+        
         vaults.treasureAnnotations.forEach { $0.target = false }
         ta.target = true
+        targets = [ta]
+        
         if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
             tav.startAnimation()
         }
-        showAllTarget([ta])
+        showAllTarget(targets)
+    }
+    
+    fileprivate func startTargetMode(title: String?) {
+        let topBarOffset: CGFloat = 40
+        
+        var frame = view.bounds
+        frame.size.height = 44 + topBarOffset
+        stopTargetModeButton = UIView(frame: frame)
+        stopTargetModeButton?.backgroundColor = UIColor(hue: 0.6, saturation: 1, brightness: 0.2, alpha: 0.8)
+        let tgr = UITapGestureRecognizer(target: self, action: #selector(type(of: self).stopTargetMode))
+        stopTargetModeButton?.addGestureRecognizer(tgr)
+        view.addSubview(stopTargetModeButton!)
+        
+        frame = stopTargetModeButton!.bounds
+        frame.origin.y += 4
+        frame.origin.y += topBarOffset
+        frame.size.height = 20
+        let titleLabel = UILabel(frame: frame)
+        stopTargetModeButton?.addSubview(titleLabel)
+        titleLabel.backgroundColor = .clear
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.textAlignment = .center
+        titleLabel.font = .systemFont(ofSize: 14)
+        titleLabel.textColor = .white
+        titleLabel.text = "スポットモード（\(title ?? "")）"
+        
+        frame.origin.y += frame.size.height
+        frame.size.height = 16
+        let subtitleLabel = UILabel(frame: frame)
+        stopTargetModeButton?.addSubview(subtitleLabel)
+        subtitleLabel.backgroundColor = .clear
+        subtitleLabel.text = "ここをタップすると通常モードに戻ります"
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.font = .systemFont(ofSize: 12)
+        subtitleLabel.textColor = .white
+    }
+    
+    @objc private func stopTargetMode() {
+        disableAllTargetLocations()
+        stopTargetModeButton?.removeFromSuperview()
+        stopTargetModeButton = nil;
+    }
+    
+    fileprivate func disableAllTargetLocations() {
+        for ta in targets {
+            ta.target = false
+            if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
+                tav.startAnimation()
+            }
+        }
     }
     
     fileprivate func showAllTarget(_ targets: [TreasureAnnotation]) {
@@ -292,13 +349,6 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     }
     
     func hideTargetLocations() {
-        for ta in vaults.treasureAnnotations {
-            if ta.target {
-                ta.target = false
-            }
-            if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
-                tav.startAnimation()
-            }
-        }
+        stopTargetMode()
     }
 }
