@@ -55,6 +55,48 @@ class Vaults: NSObject {
         }
     }
     
+    fileprivate func allPassedLandmarks() -> [Landmark] {
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Landmark")
+        
+        fr.predicate = NSPredicate(format: "passed = true")
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: #keyPath(Landmark.hiragana), ascending: true)]
+        do {
+            let landmarks = try moc.fetch(fr) as! [Landmark]
+            os_log("Landmark is fetched. Count: %d", log: OSLog.default, type: .info, landmarks.count)
+            return landmarks
+        } catch {
+            os_log("Landmark is not fetched.", log: OSLog.default, type: .error)
+            return []
+        }
+    }
+    
+    func allPassedTags() -> [Tag] {
+        var result: [Tag] = []
+        for l in allPassedLandmarks() {
+            for case let tag as Tag in l.tags!.allObjects {
+                result.append(tag)
+            }
+        }
+        let array = NSMutableArray()
+        array.addObjects(from: NSSet(array: result).allObjects)
+        let name = NSSortDescriptor(key: #keyPath(Tag.name), ascending: true)
+        array.sort(using: [name])
+        return array as! [Tag]
+    }
+    
+    func treasureAnnotationsForTag(tag: Tag) -> [TreasureAnnotation] {
+        var result: [TreasureAnnotation] = []
+        for case let l as Landmark in tag.landmarks! {
+            for ta in treasureAnnotations {
+                if ta.landmark == l {
+                    result.append(ta)
+                }
+            }
+        }
+        return result
+    }
+    
     func setPassedAnnotation(_ ta: TreasureAnnotation) {
         if !ta.passed {
             totalPassedCount += 1

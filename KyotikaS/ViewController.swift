@@ -15,7 +15,7 @@ extension Notification.Name {
     static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
 }
 
-class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultsViewControllerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -173,9 +173,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     }
     
     func hitTreasureHunterAnnotation() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultsViewController") as? VaultsViewController {
-            vc.treasureAnnotations = vaults.treasureAnnotations
-            vc.delegate = self
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultTabBarController") as? VaultTabBarController {
+            vc.vaultTabBarControllerDelegate = self
+            vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
     }
@@ -208,9 +208,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
     }
     
-    // MARK: VaultsViewControllerDelegate
+    // MARK: VaultTabBarControllerDelegate
     
-    func showTargetLocations(_ ta: TreasureAnnotation) {
+    func showRelatedTargetLocations(_ ta: TreasureAnnotation) {
         stopTargetMode()
         startTargetMode(title: ta.passed ? ta.landmark.name : "?")
         
@@ -220,6 +220,28 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         
         if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
             tav.startAnimation()
+        }
+        showAllTarget(targets)
+    }
+    
+    func showTargetLocations(tagName: String, treasureAnnotation: [TreasureAnnotation]) {
+        stopTargetMode()
+        if tagName == "" {
+            return
+        }
+        if treasureAnnotation.count < 1 {
+            return
+        }
+        startTargetMode(title: tagName)
+        
+        vaults.treasureAnnotations.forEach { $0.target = false }
+        targets = treasureAnnotation
+        
+        for ta in targets {
+            ta.target = true
+            if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
+                tav.startAnimation()
+            }
         }
         showAllTarget(targets)
     }
@@ -352,5 +374,19 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     func hideTargetLocations() {
         stopTargetMode()
+    }
+    
+    // MARK: VaultTabBarControllerDelegate
+    
+    func treasureAnnotations() -> [TreasureAnnotation] {
+        return vaults.treasureAnnotations
+    }
+    
+    func allPassedTags() -> [Tag] {
+        return vaults.allPassedTags()
+    }
+    
+    func treasureAnnotationsForTag(tag: Tag) -> [TreasureAnnotation] {
+        return vaults.treasureAnnotationsForTag(tag: tag)
     }
 }
