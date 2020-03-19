@@ -25,7 +25,6 @@
 		9763B9C4241C748F0038F396 /* TreasureHunterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */; };
 		979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D9932241760A600E510DD /* TreasureAnnotationView.swift */; };
 		979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D99342417767A00E510DD /* QuizTableViewController.swift */; };
-		97DE406F241F3D7A00D28FF5 /* VaultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE406E241F3D7A00D28FF5 /* VaultsViewController.swift */; };
 		97EB5F972422F49F000E21C6 /* VaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */; };
 		97EB5F992422F4B9000E21C6 /* LandmarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -63,7 +62,6 @@
 		9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHunterAnnotation.swift; sourceTree = "<group>"; };
 		979D9932241760A600E510DD /* TreasureAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotationView.swift; sourceTree = "<group>"; };
 		979D99342417767A00E510DD /* QuizTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewController.swift; sourceTree = "<group>"; };
-		97DE406E241F3D7A00D28FF5 /* VaultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultsViewController.swift; sourceTree = "<group>"; };
 		97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultTabBarController.swift; sourceTree = "<group>"; };
 		97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,7 +109,6 @@
 				97383CA1241225E60076A135 /* SceneDelegate.swift */,
 				97383CA3241225E60076A135 /* ViewController.swift */,
 				979D99342417767A00E510DD /* QuizTableViewController.swift */,
-				97DE406E241F3D7A00D28FF5 /* VaultsViewController.swift */,
 				97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */,
 				97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */,
 				97383CA5241225E60076A135 /* Main.storyboard */,
@@ -256,7 +253,6 @@
 				97383CA0241225E60076A135 /* AppDelegate.swift in Sources */,
 				97383CA2241225E60076A135 /* SceneDelegate.swift in Sources */,
 				97EB5F972422F49F000E21C6 /* VaultTabBarController.swift in Sources */,
-				97DE406F241F3D7A00D28FF5 /* VaultsViewController.swift in Sources */,
 				979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */,
 				9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */,
 			);

@@ -15,7 +15,7 @@ extension Notification.Name {
     static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
 }
 
-class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultsViewControllerDelegate, VaultTabBarControllerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -207,7 +207,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
     }
     
-    // MARK: VaultsViewControllerDelegate
+    // MARK: VaultTabBarControllerDelegate
     
     func showTargetLocations(_ ta: TreasureAnnotation) {
         stopTargetMode()
