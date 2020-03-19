@@ -27,6 +27,8 @@
 		979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D99342417767A00E510DD /* QuizTableViewController.swift */; };
 		97EB5F972422F49F000E21C6 /* VaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */; };
 		97EB5F992422F4B9000E21C6 /* LandmarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */; };
+		97EB5F9B24233606000E21C6 /* KeywordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F9A24233606000E21C6 /* KeywordTableViewController.swift */; };
+		97EB5FBF24234E75000E21C6 /* DetailKeywordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5FBE24234E75000E21C6 /* DetailKeywordTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		979D99342417767A00E510DD /* QuizTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewController.swift; sourceTree = "<group>"; };
 		97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultTabBarController.swift; sourceTree = "<group>"; };
 		97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTableViewController.swift; sourceTree = "<group>"; };
+		97EB5F9A24233606000E21C6 /* KeywordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTableViewController.swift; sourceTree = "<group>"; };
+		97EB5FBE24234E75000E21C6 /* DetailKeywordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKeywordTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,8 @@
 				979D99342417767A00E510DD /* QuizTableViewController.swift */,
 				97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */,
 				97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */,
+				97EB5F9A24233606000E21C6 /* KeywordTableViewController.swift */,
+				97EB5FBE24234E75000E21C6 /* DetailKeywordTableViewController.swift */,
 				97383CA5241225E60076A135 /* Main.storyboard */,
 				97383CAB241225E70076A135 /* Assets.xcassets */,
 				97383CAD241225E70076A135 /* LaunchScreen.storyboard */,
@@ -244,6 +250,7 @@
 				9703757A241A30E300C46D51 /* Progress.swift in Sources */,
 				97158B9D241B1D390025D97F /* AreaAnnotation.swift in Sources */,
 				979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */,
+				97EB5FBF24234E75000E21C6 /* DetailKeywordTableViewController.swift in Sources */,
 				97383CA4241225E60076A135 /* ViewController.swift in Sources */,
 				9763B9C4241C748F0038F396 /* TreasureHunterAnnotation.swift in Sources */,
 				9739A771241B764A0090E055 /* AreaAnnotationView.swift in Sources */,
@@ -254,6 +261,7 @@
 				97383CA2241225E60076A135 /* SceneDelegate.swift in Sources */,
 				97EB5F972422F49F000E21C6 /* VaultTabBarController.swift in Sources */,
 				979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */,
+				97EB5F9B24233606000E21C6 /* KeywordTableViewController.swift in Sources */,
 				9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

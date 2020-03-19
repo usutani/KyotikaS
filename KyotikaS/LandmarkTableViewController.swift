@@ -44,7 +44,7 @@ class LandmarkTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true, completion: nil)
         vaultTabBarControllerDelegate?.hideTargetLocations()
-        vaultTabBarControllerDelegate?.showTargetLocations(treasureAnnotations[indexPath.row])
+        vaultTabBarControllerDelegate?.showRelatedTargetLocations(treasureAnnotations[indexPath.row])
     }
     
     @objc private func tapDoneButton() {

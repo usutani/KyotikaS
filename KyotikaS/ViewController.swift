@@ -175,6 +175,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     func hitTreasureHunterAnnotation() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultTabBarController") as? VaultTabBarController {
             vc.vaultTabBarControllerDelegate = self
+            vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
     }
@@ -209,7 +210,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     // MARK: VaultTabBarControllerDelegate
     
-    func showTargetLocations(_ ta: TreasureAnnotation) {
+    func showRelatedTargetLocations(_ ta: TreasureAnnotation) {
         stopTargetMode()
         startTargetMode(title: ta.passed ? ta.landmark.name : "?")
         
@@ -219,6 +220,28 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         
         if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
             tav.startAnimation()
+        }
+        showAllTarget(targets)
+    }
+    
+    func showTargetLocations(tagName: String, treasureAnnotation: [TreasureAnnotation]) {
+        stopTargetMode()
+        if tagName == "" {
+            return
+        }
+        if treasureAnnotation.count < 1 {
+            return
+        }
+        startTargetMode(title: tagName)
+        
+        vaults.treasureAnnotations.forEach { $0.target = false }
+        targets = treasureAnnotation
+        
+        for ta in targets {
+            ta.target = true
+            if let tav = mapView.view(for: ta) as? TreasureAnnotationView {
+                tav.startAnimation()
+            }
         }
         showAllTarget(targets)
     }
@@ -357,5 +380,13 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     func treasureAnnotations() -> [TreasureAnnotation] {
         return vaults.treasureAnnotations
+    }
+    
+    func allPassedTags() -> [Tag] {
+        return vaults.allPassedTags()
+    }
+    
+    func treasureAnnotationsForTag(tag: Tag) -> [TreasureAnnotation] {
+        return vaults.treasureAnnotationsForTag(tag: tag)
     }
 }
