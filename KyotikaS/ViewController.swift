@@ -348,11 +348,14 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         tmpRgn.span.longitudeDelta *= expandCoefficient
         tmpRgn.span.latitudeDelta *= expandCoefficient
         
-        if isSameRgn(tmpRgn) {
-            mapView(mapView, regionDidChangeAnimated: false)
-        }
-        else {
-            mapView.setRegion(tmpRgn, animated: true)
+        // モーダル画面が閉じてから移動する。
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if self.isSameRgn(tmpRgn) {
+                self.mapView(self.mapView, regionDidChangeAnimated: false)
+            }
+            else {
+                self.mapView.setRegion(tmpRgn, animated: true)
+            }
         }
     }
     
