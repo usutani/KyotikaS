@@ -155,7 +155,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         }
         
         if ta.passed {
-            os_log("TreasureAnnotation is passed. Name: %@", log: OSLog.default, type: .info, ta.landmark.name ?? "N/A")
+            showLandmarkTabBarController(ta)
             return
         }
         if ta.locking {
@@ -171,6 +171,15 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             vc.userRef = ta
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func showLandmarkTabBarController(_ ta: TreasureAnnotation) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "LandmarkTabBarController") as? LandmarkTabBarController {
+            vc.landmarkNameForLandmarkTabBar = ta.landmark.name ?? ""
+            vc.URLForLandmarkTabBar = ta.landmark.url ?? ""
+            vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
     }
