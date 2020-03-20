@@ -170,22 +170,6 @@
             </objects>
             <point key="canvasLocation" x="2650.7246376811595" y="-1522.0982142857142"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="0gm-rB-Xy8">
-            <objects>
-                <viewController id="05b-Vi-bkq" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5BK-Q5-Vxf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="PdB-1n-bfI"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="pVI-yI-MG9"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fBn-LE-tHj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1782" y="-2422"/>
-        </scene>
         <!--Landmark Info View Controller-->
         <scene sceneID="8s1-bN-NmY">
             <objects>
@@ -213,7 +197,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="SP4-4J-gXx" kind="relationship" relationship="viewControllers" id="6Sk-2Q-2Bq"/>
-                        <segue destination="05b-Vi-bkq" kind="relationship" relationship="viewControllers" id="5Cu-39-fOr"/>
+                        <segue destination="fVe-px-TEM" kind="relationship" relationship="viewControllers" id="Rd7-jS-s2A"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jss-e4-Wrp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -297,4 +281,7 @@
             <point key="canvasLocation" x="1781.1594202898552" y="-3071.6517857142858"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rd7-jS-s2A"/>
+    </inferredMetricsTieBreakers>
 </document>

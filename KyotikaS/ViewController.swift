@@ -177,8 +177,10 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     fileprivate func showLandmarkTabBarController(_ ta: TreasureAnnotation) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "LandmarkTabBarController") as? LandmarkTabBarController {
+            vc.vaultTabBarControllerDelegate = self
             vc.landmarkNameForLandmarkTabBar = ta.landmark.name ?? ""
             vc.URLForLandmarkTabBar = ta.landmark.url ?? ""
+            vc.selectedTa = ta
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }

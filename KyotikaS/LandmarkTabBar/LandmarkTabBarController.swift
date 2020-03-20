@@ -13,7 +13,12 @@ class LandmarkTabBarController: UITabBarController {
     // MARK: Properties
     var landmarkNameForLandmarkTabBar = ""
     var URLForLandmarkTabBar = ""
-
+    
+    var selectedTa: TreasureAnnotation?
+    
+    weak var vaultTabBarControllerDelegate: VaultTabBarControllerDelegate?
+    var keywordTableViewController: KeywordTableViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,16 +27,12 @@ class LandmarkTabBarController: UITabBarController {
             landmarkInfoViewController?.landmarkName = landmarkNameForLandmarkTabBar
             landmarkInfoViewController?.landmarkURL = URLForLandmarkTabBar
         }
+        if let nc = viewControllers?[1] as? UINavigationController {
+            keywordTableViewController = nc.viewControllers[0] as? KeywordTableViewController
+            keywordTableViewController?.vaultTabBarControllerDelegate = vaultTabBarControllerDelegate
+            if let tags = selectedTa?.landmark.tags?.allObjects {
+                keywordTableViewController?.tags = tags as! [Tag]
+            }
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
