@@ -25,8 +25,8 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     @IBOutlet weak var mapView: MKMapView!
     var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var vaults: Vaults! = nil
-    var treasureHunterAnnotation: TreasureHunterAnnotation! = nil
-    var treasurehunterAnnotationView: TreasureHunterAnnotationView! = nil
+    var treasureHunterAnnotation: TreasureHunterAnnotation?
+    var treasurehunterAnnotationView: TreasureHunterAnnotationView?
     var targets: [TreasureAnnotation] = []
     var stopTargetModeButton: UIView? = nil
     
@@ -51,8 +51,8 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         
         // ハンター追加
         treasureHunterAnnotation = TreasureHunterAnnotation()
-        treasureHunterAnnotation.coordinate = ViewController.LOC_COORD_JR_KYOTO_STATION
-        mapView.addAnnotation(treasureHunterAnnotation)
+        treasureHunterAnnotation?.coordinate = ViewController.LOC_COORD_JR_KYOTO_STATION
+        mapView.addAnnotation(treasureHunterAnnotation!)
         
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
@@ -64,16 +64,19 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
 //        mapView.addAnnotations(vaults.treasureAnnotations)
         
         // ハンター
+        if treasureHunterAnnotation == nil {
+            return
+        }
         let gi = Vaults.gropuIndexForRegion(mapView.region)
-        treasurehunterAnnotationView.showRadar = (gi <= 0)
+        treasurehunterAnnotationView?.showRadar = (gi <= 0)
         let destinationLocation = mapView.centerCoordinate
         UIView.animate(withDuration: 0.2, animations: {
-            self.treasureHunterAnnotation.coordinate = destinationLocation
+            self.treasureHunterAnnotation!.coordinate = destinationLocation
         }, completion: nil)
         
         let array = mapView.annotations
         let set = NSMutableSet(array: array)
-        let result = vaults.treasureAnnotationsInRegion(region: mapView.region, hunter: treasureHunterAnnotation.coordinate)
+        let result = vaults.treasureAnnotationsInRegion(region: mapView.region, hunter: treasureHunterAnnotation!.coordinate)
         let treasureAnnotations = result.treasureAnnotations
         set.minus(treasureAnnotations as! Set<AnyHashable>)
         
