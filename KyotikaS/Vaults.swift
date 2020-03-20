@@ -118,7 +118,7 @@ class Vaults: NSObject {
         }
         let firstTagName = [tagNames[0]]    //　tagNamesが空の場合に使う。
         
-        // 頻出のキーワードを除外する。
+        // 頻出の手がかりを除外する。
         let keywords = ["寺社", "重要文化財", "国宝", "公共施設", "商業施設"]
         for keyword in keywords {
             for (index, tagName) in tagNames.enumerated() {

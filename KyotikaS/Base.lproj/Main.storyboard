@@ -189,11 +189,11 @@
             </objects>
             <point key="canvasLocation" x="1740.5797101449277" y="-1522.0982142857142"/>
         </scene>
-        <!--キーワード-->
+        <!--手がかり-->
         <scene sceneID="MDD-Cf-x64">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fVe-px-TEM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="キーワード" id="yi9-be-KdG"/>
+                    <tabBarItem key="tabBarItem" title="手がかり" id="yi9-be-KdG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="frw-VK-fII">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

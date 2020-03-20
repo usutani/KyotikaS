@@ -18,7 +18,7 @@ class DetailKeywordTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "キーワード（\(tagName)）"
+        title = "手がかり（\(tagName)）"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "戻る", style: .done, target: self, action: #selector(type(of: self).tapDoneButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "全て表示", style: .plain, target: self, action: #selector(type(of: self).tapShowAllButton))
     }
