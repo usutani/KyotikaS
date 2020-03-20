@@ -187,15 +187,11 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     }
     
     func hitTreasureHunterAnnotation() {
-        // TODO デバッグ用にハンターのタップでEventViewControllerを表示
-        showEventViewController()
-        return
-        //
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultTabBarController") as? VaultTabBarController {
-//            vc.vaultTabBarControllerDelegate = self
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true, completion: nil)
-//        }
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultTabBarController") as? VaultTabBarController {
+            vc.vaultTabBarControllerDelegate = self
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     //MARK: QuizTableViewControllerDelegate
@@ -234,13 +230,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     fileprivate func showEventViewController() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "EventViewController") as? EventViewController {
-            // TODO デバッグ用に進捗率を設定する
-            let p = Progress()
-            p.complete = 1.0
-            vc.progress = p
-            //
-//            vc.progress = vaults.progress
-            //
+            vc.progress = vaults.progress
             vc.delegate = self
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
