@@ -21,6 +21,7 @@
 		9739A771241B764A0090E055 /* AreaAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9739A770241B764A0090E055 /* AreaAnnotationView.swift */; };
 		9757DFFC2416365500DAA670 /* Vaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFB2416365500DAA670 /* Vaults.swift */; };
 		9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */; };
+		9762E0A52424948A00EDFCFF /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9762E0A42424948A00EDFCFF /* EventViewController.swift */; };
 		9763B9C2241C742E0038F396 /* TreasureHunterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763B9C1241C742E0038F396 /* TreasureHunterAnnotationView.swift */; };
 		9763B9C4241C748F0038F396 /* TreasureHunterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */; };
 		979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D9932241760A600E510DD /* TreasureAnnotationView.swift */; };
@@ -63,6 +64,7 @@
 		9739A770241B764A0090E055 /* AreaAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaAnnotationView.swift; sourceTree = "<group>"; };
 		9757DFFB2416365500DAA670 /* Vaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaults.swift; sourceTree = "<group>"; };
 		9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotation.swift; sourceTree = "<group>"; };
+		9762E0A42424948A00EDFCFF /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		9763B9C1241C742E0038F396 /* TreasureHunterAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreasureHunterAnnotationView.swift; sourceTree = "<group>"; };
 		9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHunterAnnotation.swift; sourceTree = "<group>"; };
 		979D9932241760A600E510DD /* TreasureAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotationView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				97383CA1241225E60076A135 /* SceneDelegate.swift */,
 				97383CA3241225E60076A135 /* ViewController.swift */,
 				979D99342417767A00E510DD /* QuizTableViewController.swift */,
+				9762E0A42424948A00EDFCFF /* EventViewController.swift */,
 				97E7F32F2424714700D07D47 /* KeywordTableViewControllerDelegate.swift */,
 				97E7F32924244B0000D07D47 /* VaultTabBar */,
 				97E7F32A24244BAD00D07D47 /* LandmarkTabBar */,
@@ -273,6 +276,7 @@
 			files = (
 				97E7F32E24244DAA00D07D47 /* LandmarkInfoViewController.swift in Sources */,
 				9763B9C2241C742E0038F396 /* TreasureHunterAnnotationView.swift in Sources */,
+				9762E0A52424948A00EDFCFF /* EventViewController.swift in Sources */,
 				9703757A241A30E300C46D51 /* Progress.swift in Sources */,
 				97158B9D241B1D390025D97F /* AreaAnnotation.swift in Sources */,
 				979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */,

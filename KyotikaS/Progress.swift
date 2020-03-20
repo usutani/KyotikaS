@@ -12,6 +12,18 @@ import os.log
 class Progress: NSObject {
     
     var complete = 0.0
+    var messageIndex: Int {
+        get {
+            var index = Int(complete * 10.0) / 2 - 1;
+            if index < 0 {
+                index = 0
+            }
+            if index >= 5 {
+                index = 4
+            }
+            return index;
+        }
+    }
     
     func initWithUserDefaults() {
         complete = UserDefaults.standard.double(forKey: "complete")

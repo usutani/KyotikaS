@@ -187,11 +187,15 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     }
     
     func hitTreasureHunterAnnotation() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultTabBarController") as? VaultTabBarController {
-            vc.vaultTabBarControllerDelegate = self
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
-        }
+        // TODO
+        showEventViewController()
+        return
+        //
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultTabBarController") as? VaultTabBarController {
+//            vc.vaultTabBarControllerDelegate = self
+//            vc.modalPresentationStyle = .fullScreen
+//            present(vc, animated: true, completion: nil)
+//        }
     }
     
     //MARK: QuizTableViewControllerDelegate
@@ -201,12 +205,15 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             os_log("view.userRef is not setted.", log: OSLog.default, type: .error)
             return
         }
+        let complete = vaults.progress.complete
+        var newComplete = complete
         
         treasureAnnotation.lastAtackDate = Date()
         
         let correct = (treasureAnnotation.landmark.correct?.intValue ?? 0) - 1
         if (view.selectedIndex == correct) {
             vaults.setPassedAnnotation(treasureAnnotation)
+            newComplete = vaults.progress.complete;
         }
         else {
             DispatchQueue.main.asyncAfter(deadline: .now() + TreasureAnnotation.PENALTY_DURATION + 0.2) {
@@ -219,7 +226,24 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             v.startAnimation()
         }
         
+        if newComplete != complete {
+            showEventViewController()
+        }
         os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
+    }
+    
+    fileprivate func showEventViewController() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "EventViewController") as? EventViewController {
+            // TODO
+            let p = Progress()
+            p.complete = 1.0
+            vc.progress = p
+            //
+//            vc.progress = vaults.progress
+            //
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     // MARK: VaultTabBarControllerDelegate
