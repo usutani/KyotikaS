@@ -187,7 +187,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     }
     
     func hitTreasureHunterAnnotation() {
-        // TODO
+        // TODO デバッグ用にハンターのタップでEventViewControllerを表示
         showEventViewController()
         return
         //
@@ -234,7 +234,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     fileprivate func showEventViewController() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "EventViewController") as? EventViewController {
-            // TODO
+            // TODO デバッグ用に進捗率を設定する
             let p = Progress()
             p.complete = 1.0
             vc.progress = p

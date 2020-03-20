@@ -80,7 +80,7 @@ class EventViewController: UIViewController {
         
         imageView!.image = UIImage(named: "Rainbow")
         
-        //TODO
+        //TODO 虹のアニメーション
 //        let animation = CAKeyframeAnimation(keyPath: "transform")
 //        let a0: CGFloat = 0.1
 //        let a1: CGFloat = CGFloat(progress!.complete)
