@@ -14,12 +14,25 @@ class EventViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var helpLabel: UILabel!
     var imageView: UIImageView? = nil
+    var stage = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showRainbow()
-        showMessage()
-        showHelp()
+        if progress == nil  {
+            return
+        }
+        if progress!.isJustComplete {
+            showGoalMessage()
+        }
+        else {
+            showRainbow()
+            showMessage()
+            showHelp()
+        }
+    }
+    
+    fileprivate func showGoalMessage() {
+        textView.text = "これで現在、登録されているスポットはすべて訪ね終わりました。京都チカチカツアーのご利用、誠にありがとうございました。\nでも、二人の旅は始まったばかりだ！"
     }
     
     fileprivate func showMessage() {
@@ -38,6 +51,9 @@ class EventViewController: UIViewController {
     
     fileprivate func showHelp() {
         if helpLabel == nil {
+            return
+        }
+        if progress!.isWaitingForNero == false {
             return
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -89,6 +105,26 @@ class EventViewController: UIViewController {
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        if progress?.isCompleted == false {
+            if progress?.isTogetherWithNero ?? false {
+                switch stage {
+                case 0:
+                    stage += 1
+                    textView.text = "そんな、まさか、でも\n間違いない…\n懐かしいみすぼらしいチョッキの小僧。\n\n寝露、寝露、寝露ォオオオ"
+                    return
+                case 1:
+                    stage += 1
+                    textView.text = "「破闘羅主ーーー」\n「アォオオオオオーーーン」\nもう大丈夫だー。心配ない寝露、これからはいつでも一緒だああ。"
+                    return
+                case 2:
+                    stage += 1
+                    textView.text = "どこ行ってたんだよぉ、勝手にいなくなってえええ。どんだけ心配かけさせたら気が済むんだこの駄犬があぁああ。」\n\nええええええええええ\n「ワキャン、キャン、キャィイイン」\n\n寝露が破闘羅主のお尻を叩く。\n「いっつも迷惑ばっかかけてええ」\n叩きながらもそれでも寝露は嬉しそうだ。\n破闘羅主も笑っている。お日様も笑ってるぅ、る〜るる、るるっる〜♩\nとにかく二人は再会できた。さあ、これからは二人で京都見学だ。\n\nレッツゴー京都！"
+                    return
+                default:
+                    textView.text = ""
+                }
+            }
+        }
         dismiss(animated: true, completion: nil)
     }
 }
