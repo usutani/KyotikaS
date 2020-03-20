@@ -11,7 +11,7 @@ import UIKit
 class DetailKeywordTableViewController: UITableViewController {
     
     // MARK: Properties
-    weak var vaultTabBarControllerDelegate: VaultTabBarControllerDelegate?
+    weak var keywordTableViewControllerDelegate: KeywordTableViewControllerDelegate?
     var treasureAnnotations: [TreasureAnnotation] = []
     var tagName = ""
     
@@ -25,18 +25,18 @@ class DetailKeywordTableViewController: UITableViewController {
     
     @objc private func tapDoneButton() {
         dismiss(animated: true, completion: nil)
-        vaultTabBarControllerDelegate?.hideTargetLocations()
+        keywordTableViewControllerDelegate?.hideTargetLocations()
     }
     
     @objc private func tapShowAllButton() {
         view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-        vaultTabBarControllerDelegate?.showTargetLocations(tagName: tagName, treasureAnnotation: treasureAnnotations)
+        keywordTableViewControllerDelegate?.showTargetLocations(tagName: tagName, treasureAnnotation: treasureAnnotations)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-        vaultTabBarControllerDelegate?.hideTargetLocations()
-        vaultTabBarControllerDelegate?.showRelatedTargetLocations(treasureAnnotations[indexPath.row])
+        keywordTableViewControllerDelegate?.hideTargetLocations()
+        keywordTableViewControllerDelegate?.showRelatedTargetLocations(treasureAnnotations[indexPath.row])
     }
     
     // MARK: - Table view data source

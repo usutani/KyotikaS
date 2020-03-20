@@ -27,6 +27,7 @@
 		979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D99342417767A00E510DD /* QuizTableViewController.swift */; };
 		97E7F32C24244BF300D07D47 /* LandmarkTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7F32B24244BF300D07D47 /* LandmarkTabBarController.swift */; };
 		97E7F32E24244DAA00D07D47 /* LandmarkInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7F32D24244DAA00D07D47 /* LandmarkInfoViewController.swift */; };
+		97E7F3302424714700D07D47 /* KeywordTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7F32F2424714700D07D47 /* KeywordTableViewControllerDelegate.swift */; };
 		97EB5F972422F49F000E21C6 /* VaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */; };
 		97EB5F992422F4B9000E21C6 /* LandmarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */; };
 		97EB5F9B24233606000E21C6 /* KeywordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EB5F9A24233606000E21C6 /* KeywordTableViewController.swift */; };
@@ -68,6 +69,7 @@
 		979D99342417767A00E510DD /* QuizTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewController.swift; sourceTree = "<group>"; };
 		97E7F32B24244BF300D07D47 /* LandmarkTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTabBarController.swift; sourceTree = "<group>"; };
 		97E7F32D24244DAA00D07D47 /* LandmarkInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkInfoViewController.swift; sourceTree = "<group>"; };
+		97E7F32F2424714700D07D47 /* KeywordTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		97EB5F962422F49F000E21C6 /* VaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultTabBarController.swift; sourceTree = "<group>"; };
 		97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTableViewController.swift; sourceTree = "<group>"; };
 		97EB5F9A24233606000E21C6 /* KeywordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTableViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				97383CA1241225E60076A135 /* SceneDelegate.swift */,
 				97383CA3241225E60076A135 /* ViewController.swift */,
 				979D99342417767A00E510DD /* QuizTableViewController.swift */,
+				97E7F32F2424714700D07D47 /* KeywordTableViewControllerDelegate.swift */,
 				97E7F32924244B0000D07D47 /* VaultTabBar */,
 				97E7F32A24244BAD00D07D47 /* LandmarkTabBar */,
 				97383CA5241225E60076A135 /* Main.storyboard */,
@@ -286,6 +289,7 @@
 				979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */,
 				97E7F32C24244BF300D07D47 /* LandmarkTabBarController.swift in Sources */,
 				97EB5F9B24233606000E21C6 /* KeywordTableViewController.swift in Sources */,
+				97E7F3302424714700D07D47 /* KeywordTableViewControllerDelegate.swift in Sources */,
 				9757DFFE24163C6F00DAA670 /* TreasureAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

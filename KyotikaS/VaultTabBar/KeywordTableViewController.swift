@@ -11,7 +11,7 @@ import UIKit
 class KeywordTableViewController: UITableViewController {
     
     // MARK: Properties
-    weak var vaultTabBarControllerDelegate: VaultTabBarControllerDelegate?
+    weak var keywordTableViewControllerDelegate: KeywordTableViewControllerDelegate?
     var tags: [Tag] = []
     
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ class KeywordTableViewController: UITableViewController {
     
     @objc private func tapDoneButton() {
         dismiss(animated: true, completion: nil)
-        vaultTabBarControllerDelegate?.hideTargetLocations()
+        keywordTableViewControllerDelegate?.hideTargetLocations()
     }
     
     // MARK: - Table view data source
@@ -49,9 +49,9 @@ class KeywordTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: indexPath, animated: true)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailKeywordTableViewController
-                controller.vaultTabBarControllerDelegate = vaultTabBarControllerDelegate
+                controller.keywordTableViewControllerDelegate = keywordTableViewControllerDelegate
                 let tag = tags[indexPath.row]
-                if let tags = vaultTabBarControllerDelegate?.treasureAnnotationsForTag(tag: tag) {
+                if let tags = keywordTableViewControllerDelegate?.treasureAnnotationsForTag(tag: tag) {
                     controller.treasureAnnotations = tags
                     controller.tagName = tag.name ?? ""
                 }

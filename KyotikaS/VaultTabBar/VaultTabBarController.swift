@@ -8,13 +8,9 @@
 
 import UIKit
 
-protocol VaultTabBarControllerDelegate : NSObjectProtocol {
+protocol VaultTabBarControllerDelegate : KeywordTableViewControllerDelegate {
     func treasureAnnotations() -> [TreasureAnnotation]
     func allPassedTags() -> [Tag]
-    func treasureAnnotationsForTag(tag: Tag) -> [TreasureAnnotation]
-    func showRelatedTargetLocations(_ ta: TreasureAnnotation)
-    func showTargetLocations(tagName: String, treasureAnnotation: [TreasureAnnotation])
-    func hideTargetLocations()
 }
 
 class VaultTabBarController: UITabBarController {
@@ -36,7 +32,7 @@ class VaultTabBarController: UITabBarController {
         }
         if let nc = viewControllers?[1] as? UINavigationController {
             keywordTableViewController = nc.viewControllers[0] as? KeywordTableViewController
-            keywordTableViewController?.vaultTabBarControllerDelegate = vaultTabBarControllerDelegate
+            keywordTableViewController?.keywordTableViewControllerDelegate = vaultTabBarControllerDelegate
             if let tags = vaultTabBarControllerDelegate?.allPassedTags() {
                 keywordTableViewController?.tags = tags
             }

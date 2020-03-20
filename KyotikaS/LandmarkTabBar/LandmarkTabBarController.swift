@@ -14,10 +14,9 @@ class LandmarkTabBarController: UITabBarController {
     var landmarkNameForLandmarkTabBar = ""
     var URLForLandmarkTabBar = ""
     
-    var selectedTa: TreasureAnnotation?
-    
-    weak var vaultTabBarControllerDelegate: VaultTabBarControllerDelegate?
+    weak var keywordTableViewControllerDelegate: KeywordTableViewControllerDelegate?
     var keywordTableViewController: KeywordTableViewController?
+    var selectedTa: TreasureAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,7 @@ class LandmarkTabBarController: UITabBarController {
         }
         if let nc = viewControllers?[1] as? UINavigationController {
             keywordTableViewController = nc.viewControllers[0] as? KeywordTableViewController
-            keywordTableViewController?.vaultTabBarControllerDelegate = vaultTabBarControllerDelegate
+            keywordTableViewController?.keywordTableViewControllerDelegate = keywordTableViewControllerDelegate
             if let tags = selectedTa?.landmark.tags?.allObjects {
                 keywordTableViewController?.tags = tags as! [Tag]
             }
