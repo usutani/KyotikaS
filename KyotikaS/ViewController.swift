@@ -15,7 +15,7 @@ extension Notification.Name {
     static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
 }
 
-class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate, EventViewControllerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -125,7 +125,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             }
             av?.annotation = annotation
             if let thav = av as? TreasureHunterAnnotationView {
-                thav.standbyNero = false
+                thav.standbyNero = vaults.progress.canStandbyNero
                 treasurehunterAnnotationView = thav
             }
             return av
@@ -241,6 +241,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             //
 //            vc.progress = vaults.progress
             //
+            vc.delegate = self
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
@@ -429,5 +430,13 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     func treasureAnnotationsForTag(tag: Tag) -> [TreasureAnnotation] {
         return vaults.treasureAnnotationsForTag(tag: tag)
+    }
+    
+    // MARK: EventViewControllerDelegate
+    
+    func eventViewControllerDone(_ vc: EventViewController) {
+        if vc.progress?.canStandbyNero ?? false {
+            treasurehunterAnnotationView?.standbyNero = true
+        }
     }
 }

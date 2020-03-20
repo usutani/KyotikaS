@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol EventViewControllerDelegate : NSObjectProtocol {
+    func eventViewControllerDone(_ vc: EventViewController)
+}
+
 class EventViewController: UIViewController {
     
+    weak var delegate: EventViewControllerDelegate?
     var progress: Progress? = nil
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var helpLabel: UILabel!
@@ -105,6 +110,10 @@ class EventViewController: UIViewController {
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        if progress == nil {
+            dismiss(animated: true, completion: nil)
+            return
+        }
         if progress?.isCompleted == false {
             if progress?.isTogetherWithNero ?? false {
                 switch stage {
@@ -125,6 +134,7 @@ class EventViewController: UIViewController {
                 }
             }
         }
+        delegate?.eventViewControllerDone(self)
         dismiss(animated: true, completion: nil)
     }
 }

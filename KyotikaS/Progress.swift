@@ -29,6 +29,11 @@ class Progress: NSObject {
             return complete < 0.4
         }
     }
+    var canStandbyNero: Bool {
+        get {
+            return complete == 1.0
+        }
+    }
     var isTogetherWithNero: Bool {
         get {
             return complete >= 1.0
