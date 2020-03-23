@@ -24,6 +24,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     // MARK: Properties
     @IBOutlet weak var mapView: MKMapView!
     var currentLocationButton: UIButton? = nil
+    var locationManager: LocationManager? = nil
     var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var vaults: Vaults! = nil
     var treasureHunterAnnotation: TreasureHunterAnnotation?
@@ -50,6 +51,10 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         vaults = Vaults()
         vaults.makeArea(region: ViewController.REGION_KYOTO)
         
+        if locationManager == nil {
+            locationManager = LocationManager()
+        }
+        
         // ハンター追加
         treasureHunterAnnotation = TreasureHunterAnnotation()
         treasureHunterAnnotation?.coordinate = ViewController.LOC_COORD_JR_KYOTO_STATION
@@ -75,6 +80,20 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     }
     
     @objc private func startTracking() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.currentLocationButton?.alpha = 0
+        })
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.start()
+        }
+        else {
+            showLocationMessage()
+        }
+    }
+    
+    fileprivate func showLocationMessage() {
+        // TODO
+        currentLocationButton?.alpha = 1
     }
     
     //MARK: MKMapViewDelegate
