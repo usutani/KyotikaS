@@ -87,13 +87,28 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             locationManager?.start()
         }
         else {
-            showLocationMessage()
+            showLocationMessage("位置情報が利用できないようです。")
         }
     }
     
-    fileprivate func showLocationMessage() {
-        // TODO
-        currentLocationButton?.alpha = 1
+    fileprivate func showLocationMessage(_ message: String) {
+        var frame = view.bounds
+        frame.size.height /= 5
+        frame.origin.y += frame.size.height
+        let alert = UILabel(frame: frame.insetBy(dx: 20, dy: 0))
+        alert.text = message
+        alert.numberOfLines = 2
+        alert.textAlignment = .center
+        alert.textColor = .white
+        alert.backgroundColor = UIColor(hue: 0.6, saturation: 0.5, brightness: 0.3, alpha: 0.5)
+        alert.layer.cornerRadius = 8
+        view.addSubview(alert)
+        
+        UIView.animate(withDuration: 1, delay: 2, animations: {
+            alert.alpha = 0
+        }, completion: { (finished) in
+            self.currentLocationButton?.alpha = 1
+        })
     }
     
     //MARK: MKMapViewDelegate
