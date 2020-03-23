@@ -15,7 +15,7 @@ extension Notification.Name {
     static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
 }
 
-class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate, EventViewControllerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate, EventViewControllerDelegate, LocationManagerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -84,6 +84,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             self.currentLocationButton?.alpha = 0
         })
         if CLLocationManager.locationServicesEnabled() {
+            locationManager?.delegate = self
             locationManager?.start()
         }
         else {
@@ -481,5 +482,27 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         if vc.progress?.canStandbyNero ?? false {
             treasurehunterAnnotationView?.standbyNero = true
         }
+    }
+    
+    // MARK: CLLocationManagerDelegate
+    
+    func locationManagerUpdate(_ manager: LocationManager) {
+        let newLocation = (manager.curtLocation?.coordinate)!
+        manager.stop()
+        
+        let hr = Region(ViewController.REGION_KYOTO)
+        if !hr.coordinateInRegion(newLocation) {
+            showLocationMessage("現在、京都チカチカの範囲外です。")
+            return
+        }
+        let rgn = MKCoordinateRegion(center: newLocation, latitudinalMeters: 1000.0, longitudinalMeters: 1000.0)    // 1km
+        
+        mapView.setRegion(rgn, animated: true)
+        
+        // TODO
+    }
+    
+    func locationManagerDidFailWithError(_ manager: LocationManager, error: NSError) {
+        // TODO
     }
 }
