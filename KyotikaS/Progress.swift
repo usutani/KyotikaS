@@ -12,6 +12,43 @@ import os.log
 class Progress: NSObject {
     
     var complete = 0.0
+    var messageIndex: Int {
+        get {
+            var index = Int(complete * 10.0) / 2 - 1;
+            if index < 0 {
+                index = 0
+            }
+            if index >= 5 {
+                index = 4
+            }
+            return index;
+        }
+    }
+    var isWaitingForNero: Bool {
+        get {
+            return complete < 0.4
+        }
+    }
+    var canStandbyNero: Bool {
+        get {
+            return complete == 1.0
+        }
+    }
+    var isTogetherWithNero: Bool {
+        get {
+            return complete >= 1.0
+        }
+    }
+    var isJustComplete: Bool {
+        get {
+            return complete == 2.0
+        }
+    }
+    var isCompleted: Bool {
+        get {
+            return complete >= 2.0
+        }
+    }
     
     func initWithUserDefaults() {
         complete = UserDefaults.standard.double(forKey: "complete")

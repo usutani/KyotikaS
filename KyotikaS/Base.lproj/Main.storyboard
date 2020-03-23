@@ -62,6 +62,64 @@
             </objects>
             <point key="canvasLocation" x="833" y="139"/>
         </scene>
+        <!--Event View Controller-->
+        <scene sceneID="qFp-5y-BTF">
+            <objects>
+                <viewController storyboardIdentifier="EventViewController" id="q8Z-2f-AgN" customClass="EventViewController" customModule="KyotikaS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4jo-eP-aPv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="message" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJp-Aj-Owf">
+                                <rect key="frame" x="20" y="44" width="374" height="128"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="IUM-aR-KlW"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="0.70850745130000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="タップで画面を閉じてください" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="5Fl-A2-m4s">
+                                <rect key="frame" x="10" y="418.5" width="394" height="59"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="59" id="0M3-Ue-Mnh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="5Fl-A2-m4s" firstAttribute="leading" secondItem="wha-XT-AhL" secondAttribute="leading" constant="10" id="BAc-go-IdO"/>
+                            <constraint firstItem="yJp-Aj-Owf" firstAttribute="top" secondItem="wha-XT-AhL" secondAttribute="top" id="QVw-Ck-f8P"/>
+                            <constraint firstItem="yJp-Aj-Owf" firstAttribute="leading" secondItem="wha-XT-AhL" secondAttribute="leading" constant="20" id="bOX-bQ-bEG"/>
+                            <constraint firstItem="wha-XT-AhL" firstAttribute="trailing" secondItem="yJp-Aj-Owf" secondAttribute="trailing" constant="20" id="exr-M0-ytD"/>
+                            <constraint firstItem="5Fl-A2-m4s" firstAttribute="centerY" secondItem="4jo-eP-aPv" secondAttribute="centerY" id="jje-HP-F9m"/>
+                            <constraint firstItem="wha-XT-AhL" firstAttribute="trailing" secondItem="5Fl-A2-m4s" secondAttribute="trailing" constant="10" id="mml-io-gZV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wha-XT-AhL"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="EDd-p7-cQV" appends="YES" id="fen-Qn-0Er"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="helpLabel" destination="5Fl-A2-m4s" id="9hC-CA-8cc"/>
+                        <outlet property="textView" destination="yJp-Aj-Owf" id="Ymq-C6-NNr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vAW-ge-EhW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="EDd-p7-cQV">
+                    <connections>
+                        <action selector="tap:" destination="q8Z-2f-AgN" id="CdZ-sW-ufI"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="831.88405797101461" y="1072.7678571428571"/>
+        </scene>
         <!--Keyword Table View Controller-->
         <scene sceneID="uZB-d8-Tqe">
             <objects>

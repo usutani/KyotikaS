@@ -15,7 +15,7 @@ extension Notification.Name {
     static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
 }
 
-class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate, EventViewControllerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -125,7 +125,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             }
             av?.annotation = annotation
             if let thav = av as? TreasureHunterAnnotationView {
-                thav.standbyNero = false
+                thav.standbyNero = vaults.progress.canStandbyNero
                 treasurehunterAnnotationView = thav
             }
             return av
@@ -201,12 +201,15 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             os_log("view.userRef is not setted.", log: OSLog.default, type: .error)
             return
         }
+        let complete = vaults.progress.complete
+        var newComplete = complete
         
         treasureAnnotation.lastAtackDate = Date()
         
         let correct = (treasureAnnotation.landmark.correct?.intValue ?? 0) - 1
         if (view.selectedIndex == correct) {
             vaults.setPassedAnnotation(treasureAnnotation)
+            newComplete = vaults.progress.complete;
         }
         else {
             DispatchQueue.main.asyncAfter(deadline: .now() + TreasureAnnotation.PENALTY_DURATION + 0.2) {
@@ -219,7 +222,19 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             v.startAnimation()
         }
         
+        if newComplete != complete {
+            showEventViewController()
+        }
         os_log("Landmark name: %@, Correct: %d, Selected: %d", log: OSLog.default, type: .info, treasureAnnotation.landmark.name!, correct, view.selectedIndex)
+    }
+    
+    fileprivate func showEventViewController() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "EventViewController") as? EventViewController {
+            vc.progress = vaults.progress
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     // MARK: VaultTabBarControllerDelegate
@@ -405,5 +420,13 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     func treasureAnnotationsForTag(tag: Tag) -> [TreasureAnnotation] {
         return vaults.treasureAnnotationsForTag(tag: tag)
+    }
+    
+    // MARK: EventViewControllerDelegate
+    
+    func eventViewControllerDone(_ vc: EventViewController) {
+        if vc.progress?.canStandbyNero ?? false {
+            treasurehunterAnnotationView?.standbyNero = true
+        }
     }
 }
