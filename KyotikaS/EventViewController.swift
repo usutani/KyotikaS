@@ -120,6 +120,8 @@ class EventViewController: UIViewController {
                 case 0:
                     stage += 1
                     textView.text = "そんな、まさか、でも\n間違いない…\n懐かしいみすぼらしいチョッキの小僧。\n\n寝露、寝露、寝露ォオオオ"
+                    imageView?.layer.removeAnimation(forKey: "puyopuyo")
+                    imageView!.image = UIImage(named: "MeetAgain1")
                     return
                 case 1:
                     stage += 1
@@ -128,6 +130,7 @@ class EventViewController: UIViewController {
                 case 2:
                     stage += 1
                     textView.text = "どこ行ってたんだよぉ、勝手にいなくなってえええ。どんだけ心配かけさせたら気が済むんだこの駄犬があぁああ。」\n\nええええええええええ\n「ワキャン、キャン、キャィイイン」\n\n寝露が破闘羅主のお尻を叩く。\n「いっつも迷惑ばっかかけてええ」\n叩きながらもそれでも寝露は嬉しそうだ。\n破闘羅主も笑っている。お日様も笑ってるぅ、る〜るる、るるっる〜♩\nとにかく二人は再会できた。さあ、これからは二人で京都見学だ。\n\nレッツゴー京都！"
+                    imageView!.image = UIImage(named: "MeetAgain2")
                     return
                 default:
                     textView.text = ""
