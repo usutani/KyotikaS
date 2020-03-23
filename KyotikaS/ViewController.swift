@@ -23,6 +23,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     // MARK: Properties
     @IBOutlet weak var mapView: MKMapView!
+    var currentLocationButton: UIButton? = nil
     var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var vaults: Vaults! = nil
     var treasureHunterAnnotation: TreasureHunterAnnotation?
@@ -54,8 +55,26 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         treasureHunterAnnotation?.coordinate = ViewController.LOC_COORD_JR_KYOTO_STATION
         mapView.addAnnotation(treasureHunterAnnotation!)
         
+        // 検索ボタン準備
+        initCurrentLocationButton()
+        
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
+    }
+    
+    fileprivate func initCurrentLocationButton() {
+        let arrow = UIImage(named: "Arrow")
+        let roundrect = UIImage(named: "RoundRect")?.stretchableImage(withLeftCapWidth: 6, topCapHeight: 14)
+        let bt = UIButton(type: .custom)
+        bt.setImage(arrow, for: .normal)
+        bt.setBackgroundImage(roundrect, for: .normal)
+        bt.addTarget(self, action: #selector(type(of: self).startTracking), for: .touchUpInside)
+        bt.frame = CGRect(x: 10, y: view.bounds.size.height - 100, width: 30, height: 30)
+        bt.autoresizingMask = .flexibleTopMargin
+        view.addSubview(bt)
+    }
+    
+    @objc private func startTracking() {
     }
     
     //MARK: MKMapViewDelegate
