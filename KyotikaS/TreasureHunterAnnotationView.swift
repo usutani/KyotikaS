@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class TreasureHunterAnnotationView: MKAnnotationView {
+class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
     var standbyNero = true {
         didSet {
             initWalker()
@@ -19,6 +19,9 @@ class TreasureHunterAnnotationView: MKAnnotationView {
     var showRadar = false {
         didSet {
             if showRadar {
+                if searching {  // 検索中なら表示しない
+                    return
+                }
                 if radar?.superlayer != nil {
                     return
                 }
@@ -47,6 +50,8 @@ class TreasureHunterAnnotationView: MKAnnotationView {
     }
     var walker: CALayer!
     var radar: CALayer!
+    var searchAnimationView2: UIView? = nil
+    var searching: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -117,5 +122,41 @@ class TreasureHunterAnnotationView: MKAnnotationView {
                 CGRect(x: 0, y: 0.75, width: quarter, height: quarter),
             ]
         }
+    }
+    
+    // MARK: Search with GNSS
+    
+    func searchAnimationOnView(_ view: UIView) {
+        if searchAnimationView2 != nil {
+            return
+        }
+        searching = true
+        showRadar = false
+        
+        let ov = UIImageView(image: UIImage(named: "Ora"))
+        ov.frame = CGRect(x: -100, y: view.bounds.size.height - 80, width: view.bounds.size.width, height: 80)
+        let oa = CAKeyframeAnimation(keyPath: "transform")
+        oa.values = [
+            NSValue(caTransform3D: CATransform3DMakeTranslation(ov.frame.size.width, 0, 1)),
+            NSValue(caTransform3D: CATransform3DIdentity),
+        ]
+        oa.duration = 2
+        oa.delegate = self
+        searchAnimationView2 = ov
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            view.addSubview(ov)
+            ov.layer.add(oa, forKey: "ora")
+        })
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        searching = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+            self.showRadar = true
+        })
+        
+        searchAnimationView2?.removeFromSuperview()
+        searchAnimationView2 = nil
     }
 }

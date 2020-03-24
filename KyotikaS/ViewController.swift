@@ -500,6 +500,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         mapView.setRegion(rgn, animated: true)
         
         // TODO
+        treasurehunterAnnotationView?.searchAnimationOnView(view)
     }
     
     func locationManagerDidFailWithError(_ manager: LocationManager, error: NSError) {
