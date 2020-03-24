@@ -50,6 +50,7 @@ class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
     }
     var walker: CALayer!
     var radar: CALayer!
+    var searchAnimationView1: UIView? = nil
     var searchAnimationView2: UIView? = nil
     var searching: Bool = false
     
@@ -127,11 +128,34 @@ class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
     // MARK: Search with GNSS
     
     func searchAnimationOnView(_ view: UIView) {
-        if searchAnimationView2 != nil {
+        if searchAnimationView1 != nil {
             return
         }
         searching = true
         showRadar = false
+        
+        let rv = UIImageView(image: UIImage(named: "Searcher"))
+        rv.layer.anchorPoint = CGPoint(x: 0.0, y: 1.0)
+        var frame = rv.frame
+        var length = view.bounds.size.width
+        if length < view.bounds.size.height {
+            length = view.bounds.height
+        }
+        length /= 2
+        let scale = (length * 1.0) / frame.size.width
+        frame.size.width *= scale
+        frame.size.height *= scale
+        frame.origin.x = view.bounds.size.width / 2
+        frame.origin.y = view.bounds.size.height / 2 - frame.size.height
+        rv.frame = frame
+        let searchAnimation = CAKeyframeAnimation(keyPath: "transform")
+        searchAnimation.values = [
+            NSValue(caTransform3D:CATransform3DIdentity),
+            NSValue(caTransform3D:CATransform3DMakeRotation(3.14, 0, 0, 1)),
+            NSValue(caTransform3D:CATransform3DMakeRotation(3.14 * 2, 0, 0, 1)),
+        ]
+        searchAnimation.duration = 2
+        searchAnimationView1 = rv
         
         let ov = UIImageView(image: UIImage(named: "Ora"))
         ov.frame = CGRect(x: -100, y: view.bounds.size.height - 80, width: view.bounds.size.width, height: 80)
@@ -145,8 +169,10 @@ class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
         searchAnimationView2 = ov
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            view.addSubview(rv)
+            rv.layer.add(searchAnimation, forKey: "Searcher")
             view.addSubview(ov)
-            ov.layer.add(oa, forKey: "ora")
+            ov.layer.add(oa, forKey: "Ora")
         })
     }
     
@@ -156,6 +182,8 @@ class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
             self.showRadar = true
         })
         
+        searchAnimationView1?.removeFromSuperview()
+        searchAnimationView1 = nil
         searchAnimationView2?.removeFromSuperview()
         searchAnimationView2 = nil
     }
