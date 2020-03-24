@@ -19,7 +19,9 @@ class VaultTabBarController: UITabBarController {
     weak var vaultTabBarControllerDelegate: VaultTabBarControllerDelegate?
     var landmarkTableViewController: LandmarkTableViewController?
     var keywordTableViewController: KeywordTableViewController?
-    
+    var helpTabBarViewController: HelpTabBarViewController?
+    var prologue: Bool = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +31,7 @@ class VaultTabBarController: UITabBarController {
             if let tas = vaultTabBarControllerDelegate?.treasureAnnotations() {
                 landmarkTableViewController?.treasureAnnotations = tas
             }
+            landmarkTableViewController?.prologue = prologue
         }
         if let nc = viewControllers?[1] as? UINavigationController {
             keywordTableViewController = nc.viewControllers[0] as? KeywordTableViewController
@@ -36,6 +39,11 @@ class VaultTabBarController: UITabBarController {
             if let tags = vaultTabBarControllerDelegate?.allPassedTags() {
                 keywordTableViewController?.tags = tags
             }
+            keywordTableViewController?.prologue = prologue
+        }
+        if let nc = viewControllers?[2] as? UINavigationController {
+            helpTabBarViewController = nc.viewControllers[0] as? HelpTabBarViewController
+            helpTabBarViewController?.vaultTabBarControllerDelegate = vaultTabBarControllerDelegate
         }
     }
 }

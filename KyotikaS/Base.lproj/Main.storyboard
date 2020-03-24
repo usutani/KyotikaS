@@ -62,6 +62,22 @@
             </objects>
             <point key="canvasLocation" x="833" y="139"/>
         </scene>
+        <!--Help Tab Bar View Controller-->
+        <scene sceneID="RnR-It-aDW">
+            <objects>
+                <viewController id="yX2-4V-QMD" customClass="HelpTabBarViewController" customModule="KyotikaS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Px-EK-KlU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="z1F-cl-E7G"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MnN-X4-sy2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zy8-Y0-gOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3350.7246376811595" y="382.36607142857139"/>
+        </scene>
         <!--Event View Controller-->
         <scene sceneID="qFp-5y-BTF">
             <objects>
@@ -193,6 +209,7 @@
                     <connections>
                         <segue destination="VHS-LG-qnY" kind="relationship" relationship="viewControllers" id="bM0-QV-K0Z"/>
                         <segue destination="fVe-px-TEM" kind="relationship" relationship="viewControllers" id="itr-du-h7e"/>
+                        <segue destination="hJp-jD-Hfz" kind="relationship" relationship="viewControllers" id="ERy-OF-CSp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CqA-xA-Quf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -338,8 +355,27 @@
             </objects>
             <point key="canvasLocation" x="2441" y="-2186"/>
         </scene>
+        <!--これまでのお話-->
+        <scene sceneID="iof-tU-XGg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hJp-jD-Hfz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="これまでのお話" id="suU-YB-jDv"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jr6-nl-krw">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="yX2-4V-QMD" kind="relationship" relationship="rootViewController" id="kZp-QR-vzh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pcq-On-NZ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2440.5797101449275" y="382.36607142857139"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rd7-jS-s2A"/>
+        <segue reference="itr-du-h7e"/>
     </inferredMetricsTieBreakers>
 </document>
