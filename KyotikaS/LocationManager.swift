@@ -11,7 +11,7 @@ import CoreLocation
 
 protocol LocationManagerDelegate : NSObjectProtocol {
     func locationManagerUpdate(_ manager: LocationManager)
-    func locationManagerDidFailWithError(_ manager: LocationManager, error: NSError)
+    func locationManagerDidFailWithError()
 }
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
@@ -66,6 +66,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // TODO
+        delegate?.locationManagerDidFailWithError()
     }
 }

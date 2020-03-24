@@ -520,7 +520,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         treasurehunterAnnotationView?.searching = false
     }
     
-    func locationManagerDidFailWithError(_ manager: LocationManager, error: NSError) {
-        // TODO
+    func locationManagerDidFailWithError() {
+        showLocationMessage("位置情報が利用できないようです。")
     }
 }
