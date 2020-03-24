@@ -14,6 +14,7 @@ class DetailKeywordTableViewController: UITableViewController {
     weak var keywordTableViewControllerDelegate: KeywordTableViewControllerDelegate?
     var treasureAnnotations: [TreasureAnnotation] = []
     var tagName = ""
+    var prologue: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +31,23 @@ class DetailKeywordTableViewController: UITableViewController {
     
     @objc private func tapShowAllButton() {
         view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-        keywordTableViewControllerDelegate?.showTargetLocations(tagName: tagName, treasureAnnotation: treasureAnnotations)
+        if prologue {
+            keywordTableViewControllerDelegate?.zoomInIfPrologue()
+        }
+        else {
+            keywordTableViewControllerDelegate?.showTargetLocations(tagName: tagName, treasureAnnotation: treasureAnnotations)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-        keywordTableViewControllerDelegate?.hideTargetLocations()
-        keywordTableViewControllerDelegate?.showRelatedTargetLocations(treasureAnnotations[indexPath.row])
+        if prologue {
+            keywordTableViewControllerDelegate?.zoomInIfPrologue()
+        }
+        else {
+            keywordTableViewControllerDelegate?.hideTargetLocations()
+            keywordTableViewControllerDelegate?.showRelatedTargetLocations(treasureAnnotations[indexPath.row])
+        }
     }
     
     // MARK: - Table view data source

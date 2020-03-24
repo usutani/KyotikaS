@@ -27,6 +27,8 @@
 		9763B9C4241C748F0038F396 /* TreasureHunterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */; };
 		979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D9932241760A600E510DD /* TreasureAnnotationView.swift */; };
 		979D99352417767A00E510DD /* QuizTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979D99342417767A00E510DD /* QuizTableViewController.swift */; };
+		97B774422429DD850014A634 /* HelpTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B774412429DD850014A634 /* HelpTabBarViewController.swift */; };
+		97B774442429F7810014A634 /* WalkingTreasureHunterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B774432429F7810014A634 /* WalkingTreasureHunterView.swift */; };
 		97E7F32C24244BF300D07D47 /* LandmarkTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7F32B24244BF300D07D47 /* LandmarkTabBarController.swift */; };
 		97E7F32E24244DAA00D07D47 /* LandmarkInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7F32D24244DAA00D07D47 /* LandmarkInfoViewController.swift */; };
 		97E7F3302424714700D07D47 /* KeywordTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7F32F2424714700D07D47 /* KeywordTableViewControllerDelegate.swift */; };
@@ -71,6 +73,8 @@
 		9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHunterAnnotation.swift; sourceTree = "<group>"; };
 		979D9932241760A600E510DD /* TreasureAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAnnotationView.swift; sourceTree = "<group>"; };
 		979D99342417767A00E510DD /* QuizTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewController.swift; sourceTree = "<group>"; };
+		97B774412429DD850014A634 /* HelpTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTabBarViewController.swift; sourceTree = "<group>"; };
+		97B774432429F7810014A634 /* WalkingTreasureHunterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingTreasureHunterView.swift; sourceTree = "<group>"; };
 		97E7F32B24244BF300D07D47 /* LandmarkTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTabBarController.swift; sourceTree = "<group>"; };
 		97E7F32D24244DAA00D07D47 /* LandmarkInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkInfoViewController.swift; sourceTree = "<group>"; };
 		97E7F32F2424714700D07D47 /* KeywordTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTableViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 				97EB5F982422F4B9000E21C6 /* LandmarkTableViewController.swift */,
 				97EB5F9A24233606000E21C6 /* KeywordTableViewController.swift */,
 				97EB5FBE24234E75000E21C6 /* DetailKeywordTableViewController.swift */,
+				97B774412429DD850014A634 /* HelpTabBarViewController.swift */,
+				97B774432429F7810014A634 /* WalkingTreasureHunterView.swift */,
 			);
 			path = VaultTabBar;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 				9763B9C4241C748F0038F396 /* TreasureHunterAnnotation.swift in Sources */,
 				9739A771241B764A0090E055 /* AreaAnnotationView.swift in Sources */,
 				97EB5F992422F4B9000E21C6 /* LandmarkTableViewController.swift in Sources */,
+				97B774422429DD850014A634 /* HelpTabBarViewController.swift in Sources */,
 				97383CCD24122B1A0076A135 /* Vaults.xcdatamodeld in Sources */,
 				9757DFFC2416365500DAA670 /* Vaults.swift in Sources */,
 				97383CA0241225E60076A135 /* AppDelegate.swift in Sources */,
@@ -303,6 +310,7 @@
 				97383CA2241225E60076A135 /* SceneDelegate.swift in Sources */,
 				97EB5F972422F49F000E21C6 /* VaultTabBarController.swift in Sources */,
 				979D9933241760A600E510DD /* TreasureAnnotationView.swift in Sources */,
+				97B774442429F7810014A634 /* WalkingTreasureHunterView.swift in Sources */,
 				97E7F32C24244BF300D07D47 /* LandmarkTabBarController.swift in Sources */,
 				97EB5F9B24233606000E21C6 /* KeywordTableViewController.swift in Sources */,
 				97E7F3302424714700D07D47 /* KeywordTableViewControllerDelegate.swift in Sources */,

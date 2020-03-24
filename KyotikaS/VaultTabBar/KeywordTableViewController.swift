@@ -13,6 +13,7 @@ class KeywordTableViewController: UITableViewController {
     // MARK: Properties
     weak var keywordTableViewControllerDelegate: KeywordTableViewControllerDelegate?
     var tags: [Tag] = []
+    var prologue: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,12 @@ class KeywordTableViewController: UITableViewController {
     
     @objc private func tapDoneButton() {
         dismiss(animated: true, completion: nil)
-        keywordTableViewControllerDelegate?.hideTargetLocations()
+        if prologue {
+            keywordTableViewControllerDelegate?.zoomInIfPrologue()
+        }
+        else {
+            keywordTableViewControllerDelegate?.hideTargetLocations()
+        }
     }
     
     // MARK: - Table view data source
@@ -54,6 +60,7 @@ class KeywordTableViewController: UITableViewController {
                 if let tags = keywordTableViewControllerDelegate?.treasureAnnotationsForTag(tag: tag) {
                     controller.treasureAnnotations = tags
                     controller.tagName = tag.name ?? ""
+                    controller.prologue = prologue
                 }
             }
         }

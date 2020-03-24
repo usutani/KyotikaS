@@ -13,4 +13,5 @@ protocol KeywordTableViewControllerDelegate : NSObjectProtocol {
     func showRelatedTargetLocations(_ ta: TreasureAnnotation)
     func showTargetLocations(tagName: String, treasureAnnotation: [TreasureAnnotation])
     func hideTargetLocations()
+    func zoomInIfPrologue()
 }

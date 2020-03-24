@@ -31,6 +31,7 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     var treasurehunterAnnotationView: TreasureHunterAnnotationView?
     var targets: [TreasureAnnotation] = []
     var stopTargetModeButton: UIView? = nil
+    var prologue: Bool = true
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -110,6 +111,13 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         }, completion: { (finished) in
             self.currentLocationButton?.alpha = 1
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if prologue {
+            hitTreasureHunterAnnotation()
+        }
     }
     
     //MARK: MKMapViewDelegate
@@ -246,7 +254,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     func hitTreasureHunterAnnotation() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "VaultTabBarController") as? VaultTabBarController {
             vc.vaultTabBarControllerDelegate = self
+            vc.prologue = prologue
             vc.modalPresentationStyle = .fullScreen
+            vc.selectedIndex = prologue ? 2 : 0
             present(vc, animated: true, completion: nil)
         }
     }
@@ -485,6 +495,19 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         if vc.progress?.canStandbyNero ?? false {
             treasurehunterAnnotationView?.standbyNero = true
         }
+    }
+    
+    func zoomInIfPrologue() {
+        if prologue == false {
+            return
+        }
+        prologue = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            // 200m
+            let rgn = MKCoordinateRegion(center: self.mapView.centerCoordinate, latitudinalMeters: 200, longitudinalMeters: 200)
+            self.mapView.setRegion(rgn, animated: true)
+        })
     }
     
     // MARK: CLLocationManagerDelegate

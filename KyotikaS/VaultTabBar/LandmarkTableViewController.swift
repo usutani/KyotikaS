@@ -13,6 +13,7 @@ class LandmarkTableViewController: UITableViewController {
     // MARK: Properties
     weak var vaultTabBarControllerDelegate: VaultTabBarControllerDelegate?
     var treasureAnnotations: [TreasureAnnotation] = []
+    var prologue: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +44,23 @@ class LandmarkTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true, completion: nil)
-        vaultTabBarControllerDelegate?.hideTargetLocations()
-        vaultTabBarControllerDelegate?.showRelatedTargetLocations(treasureAnnotations[indexPath.row])
+        if prologue {
+            vaultTabBarControllerDelegate?.zoomInIfPrologue()
+        }
+        else {
+            vaultTabBarControllerDelegate?.hideTargetLocations()
+            vaultTabBarControllerDelegate?.showRelatedTargetLocations(treasureAnnotations[indexPath.row])
+        }
     }
     
     @objc private func tapDoneButton() {
         dismiss(animated: true, completion: nil)
-        vaultTabBarControllerDelegate?.hideTargetLocations()
+        if prologue {
+            vaultTabBarControllerDelegate?.zoomInIfPrologue()
+        }
+        else {
+            vaultTabBarControllerDelegate?.hideTargetLocations()
+        }
     }
     
     // MARK: - Table view data source
