@@ -50,6 +50,8 @@ class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
     }
     var walker: CALayer!
     var radar: CALayer!
+    
+    var target: ViewController? = nil
     var searchAnimationView1: UIView? = nil
     var searchAnimationView2: UIView? = nil
     var searching: Bool = false
@@ -127,10 +129,11 @@ class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
     
     // MARK: Search with GNSS
     
-    func searchAnimationOnView(_ view: UIView) {
+    func searchAnimationOnView(_ view: UIView, target: ViewController) {
         if searchAnimationView1 != nil {
             return
         }
+        self.target = target
         searching = true
         showRadar = false
         
@@ -186,5 +189,7 @@ class TreasureHunterAnnotationView: MKAnnotationView, CAAnimationDelegate {
         searchAnimationView1 = nil
         searchAnimationView2?.removeFromSuperview()
         searchAnimationView2 = nil
+        
+        target?.searchFinished()
     }
 }

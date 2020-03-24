@@ -502,8 +502,22 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         
         mapView.setRegion(rgn, animated: true)
         
-        // TODO
-        treasurehunterAnnotationView?.searchAnimationOnView(view)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.treasurehunterAnnotationView?.searchAnimationOnView(self.view, target: self)
+        })
+    }
+    
+    func searchFinished() {
+        // レーダーアニメーション終了
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.currentLocationButton?.alpha = 1
+        })
+        // 2kmx2km園内のランドマークを発見済みにする
+        vaults.search(center: mapView.centerCoordinate, radiusMeter: 1000)
+        
+        treasurehunterAnnotationView?.searching = true
+        mapView(mapView, regionDidChangeAnimated: false)
+        treasurehunterAnnotationView?.searching = false
     }
     
     func locationManagerDidFailWithError(_ manager: LocationManager, error: NSError) {
