@@ -207,6 +207,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         if presentedViewController != nil {
             return
         }
+        if treasurehunterAnnotationView?.searching ?? false {
+            return
+        }
         
         if ta.passed {
             showLandmarkTabBarController(ta)
