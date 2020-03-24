@@ -292,6 +292,22 @@ class Vaults: NSObject {
         }
         return index;
     }
+    
+    func search(center: CLLocationCoordinate2D, radiusMeter: CLLocationDistance) {
+        let peekregion = MKCoordinateRegion(center: center, latitudinalMeters: radiusMeter, longitudinalMeters: radiusMeter)
+        let pr = Region(peekregion)
+        for ta in treasureAnnotations {
+            if ta.find {
+                // すでに設定済み
+                continue
+            }
+            if pr.coordinateInRegion(ta.coordinate) == false {
+                // 範囲外
+                continue
+            }
+            ta.find = true
+        }
+    }
 }
 
 struct Region {

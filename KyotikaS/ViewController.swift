@@ -15,7 +15,7 @@ extension Notification.Name {
     static let hitTreasureNotification = Notification.Name("hitTreasureNotification")
 }
 
-class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate, EventViewControllerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControllerDelegate, VaultTabBarControllerDelegate, EventViewControllerDelegate, LocationManagerDelegate {
     
     // MARK: Constants
     static let LOC_COORD_JR_KYOTO_STATION = CLLocationCoordinate2D(latitude: 34.985, longitude: 135.758)
@@ -23,6 +23,8 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     // MARK: Properties
     @IBOutlet weak var mapView: MKMapView!
+    var currentLocationButton: UIButton? = nil
+    var locationManager: LocationManager? = nil
     var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var vaults: Vaults! = nil
     var treasureHunterAnnotation: TreasureHunterAnnotation?
@@ -49,13 +51,65 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         vaults = Vaults()
         vaults.makeArea(region: ViewController.REGION_KYOTO)
         
+        if locationManager == nil {
+            locationManager = LocationManager()
+        }
+        
         // ハンター追加
         treasureHunterAnnotation = TreasureHunterAnnotation()
         treasureHunterAnnotation?.coordinate = ViewController.LOC_COORD_JR_KYOTO_STATION
         mapView.addAnnotation(treasureHunterAnnotation!)
         
+        // 検索ボタン準備
+        initCurrentLocationButton()
+        
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
+    }
+    
+    fileprivate func initCurrentLocationButton() {
+        let arrow = UIImage(named: "Arrow")
+        let roundrect = UIImage(named: "RoundRect")?.stretchableImage(withLeftCapWidth: 6, topCapHeight: 14)
+        let bt = UIButton(type: .custom)
+        bt.setImage(arrow, for: .normal)
+        bt.setBackgroundImage(roundrect, for: .normal)
+        bt.addTarget(self, action: #selector(type(of: self).startTracking), for: .touchUpInside)
+        bt.frame = CGRect(x: 10, y: view.bounds.size.height - 100, width: 30, height: 30)
+        bt.autoresizingMask = .flexibleTopMargin
+        view.addSubview(bt)
+    }
+    
+    @objc private func startTracking() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.currentLocationButton?.alpha = 0
+        })
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.delegate = self
+            locationManager?.start()
+        }
+        else {
+            showLocationMessage("位置情報が利用できないようです。")
+        }
+    }
+    
+    fileprivate func showLocationMessage(_ message: String) {
+        var frame = view.bounds
+        frame.size.height /= 5
+        frame.origin.y += frame.size.height
+        let alert = UILabel(frame: frame.insetBy(dx: 20, dy: 0))
+        alert.text = message
+        alert.numberOfLines = 2
+        alert.textAlignment = .center
+        alert.textColor = .white
+        alert.backgroundColor = UIColor(hue: 0.6, saturation: 0.5, brightness: 0.3, alpha: 0.5)
+        alert.layer.cornerRadius = 8
+        view.addSubview(alert)
+        
+        UIView.animate(withDuration: 1, delay: 2, animations: {
+            alert.alpha = 0
+        }, completion: { (finished) in
+            self.currentLocationButton?.alpha = 1
+        })
     }
     
     //MARK: MKMapViewDelegate
@@ -151,6 +205,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
     
     func hitTreasureAnnotation(_ ta: TreasureAnnotation) {
         if presentedViewController != nil {
+            return
+        }
+        if treasurehunterAnnotationView?.searching ?? false {
             return
         }
         
@@ -428,5 +485,42 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         if vc.progress?.canStandbyNero ?? false {
             treasurehunterAnnotationView?.standbyNero = true
         }
+    }
+    
+    // MARK: CLLocationManagerDelegate
+    
+    func locationManagerUpdate(_ manager: LocationManager) {
+        let newLocation = (manager.curtLocation?.coordinate)!
+        manager.stop()
+        
+        let hr = Region(ViewController.REGION_KYOTO)
+        if !hr.coordinateInRegion(newLocation) {
+            showLocationMessage("現在、京都チカチカの範囲外です。")
+            return
+        }
+        let rgn = MKCoordinateRegion(center: newLocation, latitudinalMeters: 1000.0, longitudinalMeters: 1000.0)    // 1km
+        
+        mapView.setRegion(rgn, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.treasurehunterAnnotationView?.searchAnimationOnView(self.view, target: self)
+        })
+    }
+    
+    func searchFinished() {
+        // レーダーアニメーション終了
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.currentLocationButton?.alpha = 1
+        })
+        // 2kmx2km園内のランドマークを発見済みにする
+        vaults.search(center: mapView.centerCoordinate, radiusMeter: 1000)
+        
+        treasurehunterAnnotationView?.searching = true
+        mapView(mapView, regionDidChangeAnimated: false)
+        treasurehunterAnnotationView?.searching = false
+    }
+    
+    func locationManagerDidFailWithError() {
+        showLocationMessage("位置情報が利用できないようです。")
     }
 }
