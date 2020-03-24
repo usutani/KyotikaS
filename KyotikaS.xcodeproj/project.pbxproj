@@ -135,12 +135,7 @@
 				97383CCB24122B1A0076A135 /* Vaults.xcdatamodeld */,
 				9757DFFB2416365500DAA670 /* Vaults.swift */,
 				97037579241A30E300C46D51 /* Progress.swift */,
-				9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */,
-				979D9932241760A600E510DD /* TreasureAnnotationView.swift */,
-				97158B9C241B1D390025D97F /* AreaAnnotation.swift */,
-				9739A770241B764A0090E055 /* AreaAnnotationView.swift */,
-				9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */,
-				9763B9C1241C742E0038F396 /* TreasureHunterAnnotationView.swift */,
+				977614442429A7870024A218 /* Annotations */,
 				97417DBF2428A0E900CACBA0 /* LocationManager.swift */,
 			);
 			path = KyotikaS;
@@ -153,6 +148,19 @@
 				97383CBB241225E70076A135 /* Info.plist */,
 			);
 			path = KyotikaSTests;
+			sourceTree = "<group>";
+		};
+		977614442429A7870024A218 /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				9757DFFD24163C6F00DAA670 /* TreasureAnnotation.swift */,
+				979D9932241760A600E510DD /* TreasureAnnotationView.swift */,
+				97158B9C241B1D390025D97F /* AreaAnnotation.swift */,
+				9739A770241B764A0090E055 /* AreaAnnotationView.swift */,
+				9763B9C3241C748F0038F396 /* TreasureHunterAnnotation.swift */,
+				9763B9C1241C742E0038F396 /* TreasureHunterAnnotationView.swift */,
+			);
+			path = Annotations;
 			sourceTree = "<group>";
 		};
 		97E7F32924244B0000D07D47 /* VaultTabBar */ = {
