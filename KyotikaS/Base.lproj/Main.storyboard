@@ -69,7 +69,135 @@
                     <view key="view" contentMode="scaleToFill" id="3Px-EK-KlU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyp-pO-n3N">
+                                <rect key="frame" x="0.0" y="20" width="414" height="876"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMM-ye-fiL">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1700"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUi-xg-z4g">
+                                                <rect key="frame" x="8" y="32" width="398" height="100.5"/>
+                                                <string key="text">　寝露（ネロ）とはぐれた破闘羅主は、京の町をさまよっていた。
+　あのとき、うまく盲導犬のふりさえできていれば…寝露があんなに元気よく周りを見渡していなければ、一匹だけ市バスから放り出される事はなかった。
+　言うまい。</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fb1-Td-Cl7">
+                                                <rect key="frame" x="8" y="192" width="398" height="92"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="92" id="Pu4-HE-voa"/>
+                                                </constraints>
+                                                <string key="text">　今は一刻も早く、はぐれて、ひとり不安になっている寝露を探し出してやらなければならない。
+　京都フリークのご主人様と一緒にまわった名所旧跡が、頭の中でひらめいては泡のように消えていく。</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Help1" translatesAutoresizingMaskIntoConstraints="NO" id="YfZ-Uk-iUQ">
+                                                <rect key="frame" x="-113" y="344" width="640" height="1499"/>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lY9-cS-4G5">
+                                                <rect key="frame" x="8" y="1851" width="398" height="234"/>
+                                                <string key="text">　東寺は市でにぎやかだった、清水の舞台はまじ高かった。羅城門跡にはかなり肩すかしをくわされたものだ。
+　何にせよ、思い出の場所のどこかに寝露がいるはず。
+
+　「破闘羅主、なんだかとっても眠いんだ」
+
+　寝るなぁああ、寝露ぉおおお。仁王像をみながら言うセリフじゃあないいいい。
+　今、そっちに行くうう。
+
+　かすかな記憶は地図にきらめきとなって現れる。そこにいけば、別の場所も思い出せるはず。走れ破闘羅主。友のため。
+　って最後メロス。</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Help2" translatesAutoresizingMaskIntoConstraints="NO" id="z1c-Eg-U4N">
+                                                <rect key="frame" x="-97" y="2093" width="608" height="666"/>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXH-cj-qcG" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
+                                                <rect key="frame" x="323" y="140" width="44" height="44"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="WyZ-op-0jJ"/>
+                                                    <constraint firstAttribute="height" constant="44" id="gbc-4n-Y0w"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2L-An-xI0" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
+                                                <rect key="frame" x="-83" y="1707" width="44" height="44"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="RBG-4P-902"/>
+                                                    <constraint firstAttribute="width" constant="44" id="yw4-YG-AL3"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjX-7l-nRC" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
+                                                <rect key="frame" x="-97" y="2093" width="44" height="44"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="8vf-rF-Wl9"/>
+                                                    <constraint firstAttribute="height" constant="44" id="vbA-im-IGh"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-kf-Js5" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
+                                                <rect key="frame" x="323" y="292" width="44" height="44"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="dlz-3r-fKV"/>
+                                                    <constraint firstAttribute="height" constant="44" id="moM-81-qw7"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="d2L-An-xI0" firstAttribute="top" secondItem="YfZ-Uk-iUQ" secondAttribute="bottom" constant="-136" id="0CT-ml-u4R"/>
+                                            <constraint firstAttribute="trailing" secondItem="lY9-cS-4G5" secondAttribute="trailing" constant="8" id="5VT-Zb-aDI"/>
+                                            <constraint firstItem="NUi-xg-z4g" firstAttribute="leading" secondItem="pMM-ye-fiL" secondAttribute="leading" constant="8" id="6MT-pg-ux3"/>
+                                            <constraint firstItem="bjX-7l-nRC" firstAttribute="leading" secondItem="z1c-Eg-U4N" secondAttribute="leading" id="6bi-EB-kDJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="NUi-xg-z4g" secondAttribute="trailing" constant="8" id="CtC-Z3-27c"/>
+                                            <constraint firstItem="lY9-cS-4G5" firstAttribute="leading" secondItem="pMM-ye-fiL" secondAttribute="leading" constant="8" id="DKQ-As-tr6"/>
+                                            <constraint firstAttribute="height" constant="1700" id="GWy-Uk-TpT"/>
+                                            <constraint firstItem="fb1-Td-Cl7" firstAttribute="top" secondItem="iXH-cj-qcG" secondAttribute="bottom" constant="8" id="K7U-YY-y2m"/>
+                                            <constraint firstItem="NUi-xg-z4g" firstAttribute="top" secondItem="pMM-ye-fiL" secondAttribute="top" constant="32" id="PVS-j9-mOm"/>
+                                            <constraint firstItem="fb1-Td-Cl7" firstAttribute="leading" secondItem="NUi-xg-z4g" secondAttribute="leading" id="Yrr-1N-W0m"/>
+                                            <constraint firstItem="iXH-cj-qcG" firstAttribute="top" secondItem="NUi-xg-z4g" secondAttribute="bottom" constant="7.5" id="fOw-b7-bHJ"/>
+                                            <constraint firstItem="ghc-kf-Js5" firstAttribute="top" secondItem="fb1-Td-Cl7" secondAttribute="bottom" constant="8" id="gWs-d1-tYF"/>
+                                            <constraint firstItem="YfZ-Uk-iUQ" firstAttribute="leading" secondItem="d2L-An-xI0" secondAttribute="trailing" constant="-74" id="hvE-qf-iaC"/>
+                                            <constraint firstItem="bjX-7l-nRC" firstAttribute="top" secondItem="z1c-Eg-U4N" secondAttribute="top" id="iGR-i4-7iy"/>
+                                            <constraint firstItem="z1c-Eg-U4N" firstAttribute="top" secondItem="lY9-cS-4G5" secondAttribute="bottom" constant="8" id="j68-zz-lQt"/>
+                                            <constraint firstAttribute="trailing" secondItem="ghc-kf-Js5" secondAttribute="trailing" constant="47" id="mhj-8I-5Zv"/>
+                                            <constraint firstAttribute="trailing" secondItem="iXH-cj-qcG" secondAttribute="trailing" constant="47" id="q5Y-0N-lMR"/>
+                                            <constraint firstItem="fb1-Td-Cl7" firstAttribute="trailing" secondItem="iXH-cj-qcG" secondAttribute="trailing" constant="39" id="qBk-8V-JOl"/>
+                                            <constraint firstItem="YfZ-Uk-iUQ" firstAttribute="top" secondItem="ghc-kf-Js5" secondAttribute="bottom" constant="8" id="ttG-Wc-UWN"/>
+                                            <constraint firstItem="iXH-cj-qcG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pMM-ye-fiL" secondAttribute="leading" constant="323" id="uHI-FU-nOG"/>
+                                            <constraint firstItem="ghc-kf-Js5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pMM-ye-fiL" secondAttribute="leading" constant="323" id="x3n-zZ-Heu"/>
+                                            <constraint firstItem="lY9-cS-4G5" firstAttribute="top" secondItem="YfZ-Uk-iUQ" secondAttribute="bottom" constant="8" id="zCg-Fy-zkt"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="pMM-ye-fiL" firstAttribute="trailing" secondItem="GDH-nP-8jW" secondAttribute="trailing" id="7mu-rj-0iX"/>
+                                    <constraint firstItem="YfZ-Uk-iUQ" firstAttribute="centerX" secondItem="GDH-nP-8jW" secondAttribute="centerX" id="9fc-nZ-uCg"/>
+                                    <constraint firstItem="pMM-ye-fiL" firstAttribute="top" secondItem="GDH-nP-8jW" secondAttribute="top" id="IRC-lX-mvi"/>
+                                    <constraint firstItem="z1c-Eg-U4N" firstAttribute="centerX" secondItem="GDH-nP-8jW" secondAttribute="centerX" id="Oxs-vN-4WW"/>
+                                    <constraint firstItem="pMM-ye-fiL" firstAttribute="leading" secondItem="GDH-nP-8jW" secondAttribute="leading" id="avq-z3-69j"/>
+                                    <constraint firstItem="pMM-ye-fiL" firstAttribute="width" secondItem="LfF-PS-ZhY" secondAttribute="width" id="s3O-RB-pnh"/>
+                                    <constraint firstItem="pMM-ye-fiL" firstAttribute="bottom" secondItem="GDH-nP-8jW" secondAttribute="bottom" id="xnu-se-cld"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="GDH-nP-8jW"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="LfF-PS-ZhY"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fyp-pO-n3N" firstAttribute="leading" secondItem="z1F-cl-E7G" secondAttribute="leading" id="PkH-dQ-Oia"/>
+                            <constraint firstAttribute="bottom" secondItem="fyp-pO-n3N" secondAttribute="bottom" id="cR1-7Q-qad"/>
+                            <constraint firstItem="fyp-pO-n3N" firstAttribute="trailing" secondItem="z1F-cl-E7G" secondAttribute="trailing" id="odb-V9-Z7B"/>
+                            <constraint firstItem="fyp-pO-n3N" firstAttribute="top" secondItem="3Px-EK-KlU" secondAttribute="top" constant="20" symbolic="YES" id="rPz-nt-PZU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="z1F-cl-E7G"/>
                     </view>
                     <navigationItem key="navigationItem" id="MnN-X4-sy2"/>
@@ -375,6 +503,10 @@
             <point key="canvasLocation" x="2440.5797101449275" y="382.36607142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Help1" width="320" height="749.5"/>
+        <image name="Help2" width="304" height="333"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="itr-du-h7e"/>
     </inferredMetricsTieBreakers>
