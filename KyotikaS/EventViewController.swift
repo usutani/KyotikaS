@@ -21,8 +21,8 @@ class EventViewController: UIViewController {
     var imageView: UIImageView? = nil
     var stage = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if progress == nil  {
             return
         }
@@ -80,33 +80,30 @@ class EventViewController: UIViewController {
         
         imageView!.image = UIImage(named: "Rainbow")
         
-        //TODO 虹のアニメーション
-//        let animation = CAKeyframeAnimation(keyPath: "transform")
-//        let a0: CGFloat = 0.1
-//        let a1: CGFloat = CGFloat(progress!.complete)
-//        animation.values = [
-//            NSValue(caTransform3D:CATransform3DMakeScale(a0, a0, 1.0)),
-//            NSValue(caTransform3D:CATransform3DMakeScale(a1, a1, 1.0)),
-//        ]
-//        animation.keyTimes = [0.0, 1.0]
-//
-//        let alphaanimation = CAKeyframeAnimation(keyPath: "opacity")
-//        alphaanimation.values = [
-//            a0,
-//            a1,
-//        ]
-//        alphaanimation.keyTimes = animation.keyTimes
-//
-//        let theGroup = CAAnimationGroup()
-//        theGroup.animations = [
-//            animation,
-//            alphaanimation,
-//        ]
-//        theGroup.duration = 2
-//        theGroup.repeatCount = Float.infinity
-//        theGroup.autoreverses = true
-//
-//        imageView?.layer.add(theGroup, forKey: "puyopuyo")
+        // 虹のアニメーション
+        let animation = CAKeyframeAnimation(keyPath: "transform")
+        let a0: CGFloat = 0.1
+        let a1: CGFloat = CGFloat(progress!.complete)
+        animation.values = [
+            CATransform3DMakeScale(a0, a0, 1.0),
+            CATransform3DMakeScale(a1, a1, 1.0),
+        ]
+        animation.keyTimes = [0.0, 1.0]
+        
+        let alphaanimation = CAKeyframeAnimation(keyPath: "opacity")
+        alphaanimation.values = [a0, a1]
+        alphaanimation.keyTimes = animation.keyTimes
+
+        let theGroup = CAAnimationGroup()
+        theGroup.animations = [
+            animation,
+            alphaanimation,
+        ]
+        theGroup.duration = 2
+        theGroup.repeatCount = Float.infinity
+        theGroup.autoreverses = true
+
+        imageView?.layer.add(theGroup, forKey: "puyopuyo")
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
