@@ -13,6 +13,7 @@ class TreasureAnnotationView: MKAnnotationView {
     
     var blinker: CALayer!
     var locker: CALayer!
+    var nameLabel: UILabel? = nil
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -43,6 +44,10 @@ class TreasureAnnotationView: MKAnnotationView {
     }
     
     func startAnimation() {
+        image = nil
+        nameLabel?.removeFromSuperview()
+        nameLabel = nil
+        
         let ta = self.annotation as! TreasureAnnotation
         if ta.passed && !ta.target {
             if blinker != nil {
@@ -53,10 +58,8 @@ class TreasureAnnotationView: MKAnnotationView {
                 locker.removeFromSuperlayer()
             }
             image = UIImage(named: "Landmark")
+            showNameLabel(treasureAnnotation: ta)
             return
-        }
-        else {
-            image = nil
         }
         
         if blinker == nil {
@@ -68,6 +71,7 @@ class TreasureAnnotationView: MKAnnotationView {
         if ta.target {
             if ta.passed {
                 blinker.contents = UIImage(named: "LandmarkTargetPassed")?.cgImage
+                showNameLabel(treasureAnnotation: ta)
             }
             else {
                 blinker.contents = UIImage(named: "LandmarkTarget")?.cgImage
@@ -102,6 +106,23 @@ class TreasureAnnotationView: MKAnnotationView {
         else {
             locker?.removeFromSuperlayer()
         }
+    }
+    
+    fileprivate func showNameLabel(treasureAnnotation ta: TreasureAnnotation) {
+        nameLabel = UILabel(frame: bounds)
+        nameLabel?.text = ta.landmark.name
+        nameLabel?.textAlignment = .center
+        nameLabel?.font = UIFont.systemFont(ofSize: 12.0)
+        nameLabel?.textColor = .white
+        nameLabel?.backgroundColor = .darkGray
+        nameLabel?.layer.cornerRadius = 3
+        nameLabel?.clipsToBounds = true
+        nameLabel?.sizeToFit()
+        var labelFrame = (nameLabel?.frame.insetBy(dx: -3, dy: -1))!
+        labelFrame.origin.x -= (labelFrame.size.width / 2 - bounds.width / 2)
+        labelFrame.origin.y += bounds.height
+        nameLabel?.frame = labelFrame
+        addSubview(nameLabel!)
     }
     
     private func animationRectValues() -> [NSValue] {
