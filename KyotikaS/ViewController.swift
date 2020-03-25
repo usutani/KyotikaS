@@ -66,6 +66,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         
         // JR京都駅を中心に地図を表示する。アニメーション抜き。
         mapView.region = ViewController.REGION_KYOTO
+        
+        // 地図を3D表示
+        mapView.mapType = .satelliteFlyover
     }
     
     fileprivate func initCurrentLocationButton() {
@@ -381,6 +384,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
         disableAllTargetLocations()
         stopTargetModeButton?.removeFromSuperview()
         stopTargetModeButton = nil;
+        
+        // 地図を3D表示
+        initCamera()
     }
     
     fileprivate func disableAllTargetLocations() {
@@ -390,6 +396,14 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
                 tav.startAnimation()
             }
         }
+    }
+    
+    fileprivate func initCamera() {
+        let distance: CLLocationDistance = 500
+        let pitch: CGFloat = 80
+        let heading = 0.0
+        let camera = MKMapCamera(lookingAtCenter: mapView.centerCoordinate, fromDistance: distance, pitch: pitch, heading: heading)
+        self.mapView.setCamera(camera, animated: true)
     }
     
     fileprivate func showAllTarget(_ targets: [TreasureAnnotation]) {
@@ -507,6 +521,9 @@ class ViewController: UIViewController, MKMapViewDelegate, QuizTableViewControll
             // 200m
             let rgn = MKCoordinateRegion(center: self.mapView.centerCoordinate, latitudinalMeters: 200, longitudinalMeters: 200)
             self.mapView.setRegion(rgn, animated: true)
+            
+            // 地図を3D表示
+            self.initCamera()
         })
     }
     
