@@ -53,6 +53,8 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>位置情報を取得します。</string>
+	<key>CFBundleDisplayName</key>
+	<string>京チカS</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
