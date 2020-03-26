@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -97,10 +97,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Help1" translatesAutoresizingMaskIntoConstraints="NO" id="YfZ-Uk-iUQ">
-                                                <rect key="frame" x="-113" y="344" width="640" height="1499"/>
+                                                <rect key="frame" x="47" y="344" width="320" height="749.5"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lY9-cS-4G5">
-                                                <rect key="frame" x="8" y="1851" width="398" height="234"/>
+                                                <rect key="frame" x="8" y="1101.5" width="398" height="234"/>
                                                 <string key="text">　東寺は市でにぎやかだった、清水の舞台はまじ高かった。羅城門跡にはかなり肩すかしをくわされたものだ。
 　何にせよ、思い出の場所のどこかに寝露がいるはず。
 
@@ -116,9 +116,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Help2" translatesAutoresizingMaskIntoConstraints="NO" id="z1c-Eg-U4N">
-                                                <rect key="frame" x="-97" y="2093" width="608" height="666"/>
+                                                <rect key="frame" x="55" y="1343.5" width="304" height="333"/>
                                             </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXH-cj-qcG" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXH-cj-qcG" customClass="WalkingTreasureHunterView" customModule="KyotikaS" customModuleProvider="target">
                                                 <rect key="frame" x="323" y="140" width="44" height="44"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
@@ -126,23 +126,23 @@
                                                     <constraint firstAttribute="height" constant="44" id="gbc-4n-Y0w"/>
                                                 </constraints>
                                             </view>
-                                            <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2L-An-xI0" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
-                                                <rect key="frame" x="-83" y="1707" width="44" height="44"/>
+                                            <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2L-An-xI0" customClass="WalkingTreasureHunterView" customModule="KyotikaS" customModuleProvider="target">
+                                                <rect key="frame" x="63" y="803.5" width="44" height="44"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="RBG-4P-902"/>
                                                     <constraint firstAttribute="width" constant="44" id="yw4-YG-AL3"/>
                                                 </constraints>
                                             </view>
-                                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjX-7l-nRC" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
-                                                <rect key="frame" x="-97" y="2093" width="44" height="44"/>
+                                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjX-7l-nRC" customClass="WalkingTreasureHunterView" customModule="KyotikaS" customModuleProvider="target">
+                                                <rect key="frame" x="55" y="1343.5" width="44" height="44"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="8vf-rF-Wl9"/>
                                                     <constraint firstAttribute="height" constant="44" id="vbA-im-IGh"/>
                                                 </constraints>
                                             </view>
-                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-kf-Js5" customClass="WalkingTreasureHunterView" customModule="ios_study_animated_mkannotation" customModuleProvider="target">
+                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-kf-Js5" customClass="WalkingTreasureHunterView" customModule="KyotikaS" customModuleProvider="target">
                                                 <rect key="frame" x="323" y="292" width="44" height="44"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
@@ -153,7 +153,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="d2L-An-xI0" firstAttribute="top" secondItem="YfZ-Uk-iUQ" secondAttribute="bottom" constant="-136" id="0CT-ml-u4R"/>
+                                            <constraint firstItem="d2L-An-xI0" firstAttribute="top" secondItem="YfZ-Uk-iUQ" secondAttribute="bottom" constant="-290" id="0CT-ml-u4R"/>
                                             <constraint firstAttribute="trailing" secondItem="lY9-cS-4G5" secondAttribute="trailing" constant="8" id="5VT-Zb-aDI"/>
                                             <constraint firstItem="NUi-xg-z4g" firstAttribute="leading" secondItem="pMM-ye-fiL" secondAttribute="leading" constant="8" id="6MT-pg-ux3"/>
                                             <constraint firstItem="bjX-7l-nRC" firstAttribute="leading" secondItem="z1c-Eg-U4N" secondAttribute="leading" id="6bi-EB-kDJ"/>
@@ -165,7 +165,7 @@
                                             <constraint firstItem="fb1-Td-Cl7" firstAttribute="leading" secondItem="NUi-xg-z4g" secondAttribute="leading" id="Yrr-1N-W0m"/>
                                             <constraint firstItem="iXH-cj-qcG" firstAttribute="top" secondItem="NUi-xg-z4g" secondAttribute="bottom" constant="7.5" id="fOw-b7-bHJ"/>
                                             <constraint firstItem="ghc-kf-Js5" firstAttribute="top" secondItem="fb1-Td-Cl7" secondAttribute="bottom" constant="8" id="gWs-d1-tYF"/>
-                                            <constraint firstItem="YfZ-Uk-iUQ" firstAttribute="leading" secondItem="d2L-An-xI0" secondAttribute="trailing" constant="-74" id="hvE-qf-iaC"/>
+                                            <constraint firstItem="YfZ-Uk-iUQ" firstAttribute="leading" secondItem="d2L-An-xI0" secondAttribute="trailing" constant="-60" id="hvE-qf-iaC"/>
                                             <constraint firstItem="bjX-7l-nRC" firstAttribute="top" secondItem="z1c-Eg-U4N" secondAttribute="top" id="iGR-i4-7iy"/>
                                             <constraint firstItem="z1c-Eg-U4N" firstAttribute="top" secondItem="lY9-cS-4G5" secondAttribute="bottom" constant="8" id="j68-zz-lQt"/>
                                             <constraint firstAttribute="trailing" secondItem="ghc-kf-Js5" secondAttribute="trailing" constant="47" id="mhj-8I-5Zv"/>
@@ -503,11 +503,11 @@
             <point key="canvasLocation" x="2440.5797101449275" y="382.36607142857139"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="itr-du-h7e"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Help1" width="320" height="749.5"/>
         <image name="Help2" width="304" height="333"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="itr-du-h7e"/>
-    </inferredMetricsTieBreakers>
 </document>
