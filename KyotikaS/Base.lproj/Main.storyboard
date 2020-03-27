@@ -411,7 +411,7 @@
         <scene sceneID="68R-IU-Tn4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VHS-LG-qnY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="場所" id="yPy-89-TnR"/>
+                    <tabBarItem key="tabBarItem" title="場所" image="LandmarkList" id="yPy-89-TnR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AvO-XH-nB5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -430,7 +430,7 @@
         <scene sceneID="MDD-Cf-x64">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fVe-px-TEM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="手がかり" id="yi9-be-KdG"/>
+                    <tabBarItem key="tabBarItem" title="手がかり" image="KeywordList" id="yi9-be-KdG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="frw-VK-fII">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -468,7 +468,7 @@
         <scene sceneID="iAw-w4-rCA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SP4-4J-gXx" userLabel="場所の情報" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="lAv-8j-p98" userLabel="場所の情報"/>
+                    <tabBarItem key="tabBarItem" title="Item 1" image="LandmarkList" id="lAv-8j-p98" userLabel="場所の情報"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SOp-Gq-e04">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -487,7 +487,7 @@
         <scene sceneID="iof-tU-XGg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hJp-jD-Hfz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="これまでのお話" id="suU-YB-jDv"/>
+                    <tabBarItem key="tabBarItem" title="これまでのお話" image="About" id="suU-YB-jDv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jr6-nl-krw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -507,7 +507,10 @@
         <segue reference="itr-du-h7e"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="About" width="30" height="30"/>
         <image name="Help1" width="320" height="749.5"/>
         <image name="Help2" width="304" height="333"/>
+        <image name="KeywordList" width="30" height="30"/>
+        <image name="LandmarkList" width="30" height="30"/>
     </resources>
 </document>
